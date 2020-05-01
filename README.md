@@ -6,7 +6,7 @@ Automatically imports desired running2win activity data, including descriptions 
 1) Click above button
 ```
       a. If the link doesn't work: go to www.repl.it
-      b. Click "Start Codind <>" in the upper right
+      b. Click "Start Coding <>" in the upper right
       c. Select "Import from Github"
       d. Copy "sfergusond/Running2Win-to-Strava-Importer" and import
 ```
