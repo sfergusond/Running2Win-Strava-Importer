@@ -5,6 +5,8 @@ Author: Spencer Ferguson-Dryden
 https://github.com/sfergusond
 
 TO DO: Implement description-only upload, migrate helper functions out, add Facebook, Apple, Email/PW login options
+
+Uses: webbot from https://github.com/nateshmbhat/webbot
 """
 
 from webbot import Browser
@@ -100,7 +102,6 @@ def runs_to_dict(text):
         # add to dict
         _dict = {'date': parse_date(date), 'type': _type, 'title': title, 'distance': str(parse_distance(distance)), 'time': parse_time(time), 'description': description}
         master_list.append(_dict)
-        print(_dict)
         
     '''for i in master_list:
         print(i, end = '\n\n')'''
@@ -249,7 +250,7 @@ if __name__ == '__main__':
     import argparse
     import sys
     
-    parser = argparse.ArgumentParser(description='Retrieve R2W data and upload to Strava')
+    parser = argparse.ArgumentParser(description='Retrieve R2W data and upload to Strava -- PUT ALL ARGUMENTS IN DOUBLE QUOTES | ex: -ru \"myr2wusername\" ---')
     parser.add_argument('-ru', type = str, metavar = 'r2w_username', help = 'Running2Win username', required=True)
     parser.add_argument('-rp', type = str, metavar = 'r2w_password', help = 'Running2Win password', required=True)
     parser.add_argument('-a', type = str, metavar = 'after_date', help = 'Date after which to search for activities on Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--', required=True)
@@ -279,8 +280,8 @@ if __name__ == '__main__':
         f = log_to_html(file) # store as text/text file
         #log_to_html(file)
         t = get_text(f) # strip text
-        with open('runs.txt', 'r') as f:
-            t = get_text(f)
+        '''with open('runs.txt', 'r') as f:
+            t = get_text(f)'''
         
         gathered = runs_to_dict(t)
         runs.extend(gathered)
