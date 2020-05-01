@@ -263,7 +263,7 @@ if __name__ == '__main__':
     parser.add_argument('-sp', type = str, metavar = 'strava_password', help = 'Strava password', required=True)
     args = parser.parse_args()
             
-    web = Browser(showWindow=True)
+    web = Browser(showWindow=False)
     login_r2w(args.ru, args.rp, web)
     tmp = (args.a).split('-')
     start = datetime.date(int(tmp[0]), int(tmp[1]), int(tmp[2]))
