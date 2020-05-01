@@ -54,8 +54,8 @@ Note: this will take a long time to run, so it is best to keep your machine on u
 
 # Features
 
-Gathers all activity data from Running2Win (not including acticities marked "NO RUN - OFF", "Other", or "Cross Training/Other"), for each activitiy retrieving its activity type, title, distance, time, description, member comments, race information, and interval information (coming soon).
+Gathers all activity data from Running2Win (not including acticities marked "NO RUN - OFF", "Other", or "Cross Training/Other"), for each activitiy retrieving its activity type, title, distance, time, description, member comments, race information, and interval information.
 
 Uploads each gathered activity from r2w onto your Strava account. 
 
-In progress: parsing interval info, download to CSV option (instead of uploading to Strava), adding Running2Win activity description/race info/interval info/comments to all existing Strava activity descriptions.
+In progress: download to CSV option (instead of uploading to Strava), matching Running2Win activity descriptions/race info/interval info/comments to existing Strava activity descriptions rather than creating new activities.
