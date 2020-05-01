@@ -4,6 +4,10 @@ Automatically imports desired running2win activity data, including descriptions 
 [![Run on Repl.it](https://repl.it/badge/github/sfergusond/Running2Win-to-Strava-Importer)](https://repl.it/github/sfergusond/Running2Win-to-Strava-Importer)
 
 1) Click above button
+a. If the link doesn't work: go to www.repl.it
+b. Click "Start Codind <>" in the upper right
+c. Select "Import from Github"
+d. Copy "sfergusond/Running2Win-to-Strava-Importer" and import
 2) Type ```pip install -r requirements.txt``` into the command line (black window with an orange ">", should show a blinking white cursor on click) and hit ENTER on your keyboard
 3) Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
 4) Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
