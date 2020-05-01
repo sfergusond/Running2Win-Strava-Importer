@@ -11,8 +11,7 @@ usage: R2Wbot.py \[-h] -ru r2w_username -rp r2w_password -a after_date -b
 
 Retrieve R2W data and upload to Strava --- PUT ALL ARGUMENTS IN DOUBLE QUOTES | ex: -ru "myr2wusername" ---
 
-optional arguments:
-  -h, --help            show this help message and exit
+required arguments:
   -ru r2w_username      Running2Win username
   -rp r2w_password      Running2Win password
   -a after_date         Date after which to search for activities on
@@ -21,3 +20,7 @@ optional arguments:
                         Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--
   -su strava_email      Strava username (MUST BE A GOOGLE EMAIL ADDRESS LINKED TO YOUR STRAVA ACCOUNT)
   -sp strava_password   Strava password 
+
+optional arguments:
+  -h, --help            show this help message and exit
+```
