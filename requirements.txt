@@ -1,2 +1,3 @@
 webbot
 bs4
+selenium
