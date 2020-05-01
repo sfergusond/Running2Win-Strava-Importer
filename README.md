@@ -34,6 +34,7 @@ optional arguments:
   -m Strava_login_method
                         Method for logging into Strava, default is Google sign-in
                         Options: "Email" login to Strava via direct email/password combination
+                                 "Facebook" login to Strava using Facebook information
 ```
 
 # Examples
