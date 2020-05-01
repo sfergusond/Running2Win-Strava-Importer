@@ -5,7 +5,7 @@ Automatically imports desired running2win activity data, including descriptions 
 
 1) Click above button
 2) Type ```pip install -r requirements.txt``` into the command line (black window with an orange ">", should show a blinking white cursor on click) and hit ENTER on your keyboard
-3) Once the packages have been installed, type desired arguments into the command line. Altneratively, copy the example below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
+3) Once the packages have been installed, type desired arguments into the command line. Alternatively, copy the example below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
 4) Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
 5) Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 3) with the new start date.
 
