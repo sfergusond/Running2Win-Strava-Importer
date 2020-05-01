@@ -5,7 +5,7 @@ Automatically imports desired running2win activity data, including descriptions 
 
 1) Click above button
 2) Press the green "Run" button on the Repl.it website
-3) Once the packages have been installed, type the arguments into the command line (the black window with a white ">" in the terminal should show a blinking cursor if you click on it). Or, copy the example below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
+3) Once the packages have been installed, type the arguments into the command line (the black window with an orange ">" in the terminal should show a blinking cursor if you click on it). Or, copy the example below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
 4) Let the program run. It will take a while.
 
 # Usage
