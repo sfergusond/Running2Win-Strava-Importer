@@ -28,6 +28,11 @@ def login_strava(username, password, web, method):
         time.sleep(2)
         web.type(password, classname = 'Xb9hP')
         web.click('Next')
+    elif method == 'Facebook':
+        web.click('Log in using Facebook')
+        web.type(username, id='email')
+        web.type(password, id='pass')
+        web.click(id='loginbutton')
     else:
         web.type(username, id='email')
         web.type(password, id='password')
