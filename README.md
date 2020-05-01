@@ -4,9 +4,12 @@ Automatically imports desired running2win activity data, including descriptions 
 [![Run on Repl.it](https://repl.it/badge/github/sfergusond/Running2Win-to-Strava-Importer)](https://repl.it/github/sfergusond/Running2Win-to-Strava-Importer)
 
 1) Click above button
-2) Press the green "Run" button on the Repl.it website
-3) Once the packages have been installed, type the arguments into the command line (the black window with an orange ">" in the terminal should show a blinking cursor if you click on it). Or, copy the example below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
-4) Let the program run. It will take a while.
+2) Type ```pip install -r requirements.txt``` into the command line (black window with an orange ">", should show a blinking white cursor on click) and hit ENTER on your keyboard
+3) Once the packages have been installed, type desired arguments into the command line. Altneratively, copy the example below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
+4) Let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
+5) Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 3) with the new start date.
+
+Note: Currently the program can only support logging into Strava via a Google account or email/password combination. It does not work with Apple or Facebook logins.
 
 # Usage
 
@@ -39,3 +42,11 @@ python R2WBot.py -ru "runner1" -rp "password1" -a "2016-05-31" -b "2020-04-01" -
 This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). The activities will then be uploaded automatically to Strava. 
 
 Note: this will take along time to run, so it is best to keep your machine on until the upload is complete
+
+# Features
+
+Gathers all activity data from Running2Win (not including acticities marked "NO RUN - OFF", "Other", or "Cross Training/Other"), for each activitiy retrieving its activity type, title, distance, time, description, member comments, race information, and interval information (coming soon).
+
+Uploads each gathered activity from r2w onto your Strava account. 
+
+In progress: parsing interval info, download to CSV option (instead of uploading to Strava), adding Running2Win activity description/race info/interval info/comments to all existing Strava activity descriptions.
