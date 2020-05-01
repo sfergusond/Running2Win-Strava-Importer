@@ -63,6 +63,7 @@ def runs_to_dict(text):
     master_list = []
         
     for r in runs:
+        #print(r)
         # date
         date = r[r.find('y,') + 3:r.find(' |')]
     
@@ -77,9 +78,10 @@ def runs_to_dict(text):
         # distance
         r = r[r.find('distance |') + 11:]
         distance = r[:r.find(' |'):]
+        if '-' in distance: continue;
             
         # time
-        if 'in' in distance:
+        if ':' in distance:
             r = r[r.find('in'):]
             time = r[3:r.find(' [')]
         else: time = '0'
@@ -101,6 +103,7 @@ def runs_to_dict(text):
     
         # add to dict
         _dict = {'date': parse_date(date), 'type': _type, 'title': title, 'distance': str(parse_distance(distance)), 'time': parse_time(time), 'description': description}
+        #print(_dict)
         master_list.append(_dict)
         
     '''for i in master_list:
@@ -171,8 +174,10 @@ def parse_comments(r):
     return desc
 
 def parse_distance(distance):
+    import re
     unit = distance[distance.find(' ') + 1:]
     dist = distance[:distance.find(' ')]
+    #dist = re.sub("[^0-9]", "", dist)
     
     if 'Mile' in unit:
         return round(float(dist), 2)
@@ -205,7 +210,7 @@ def parse_date(date):
     return d
 
 def add_strava_entry(run, web):
-    web.click(id='activity_distance')
+    #web.click(id='activity_distance')
     web.type(run['distance'], id='activity_distance')
     
     web.click('NEXT', tag = 'span')
@@ -248,18 +253,17 @@ def add_strava_entry(run, web):
 
 if __name__ == '__main__':
     import argparse
-    import sys
     
     parser = argparse.ArgumentParser(description='Retrieve R2W data and upload to Strava -- PUT ALL ARGUMENTS IN DOUBLE QUOTES | ex: -ru \"myr2wusername\" ---')
     parser.add_argument('-ru', type = str, metavar = 'r2w_username', help = 'Running2Win username', required=True)
     parser.add_argument('-rp', type = str, metavar = 'r2w_password', help = 'Running2Win password', required=True)
     parser.add_argument('-a', type = str, metavar = 'after_date', help = 'Date after which to search for activities on Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--', required=True)
     parser.add_argument('-b', type = str, metavar = 'before_date', help = 'Date at which to stop collecting activities form Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--', required=True)
-    parser.add_argument('-su', type = str, metavar = 'strava_email (MUST BE A GOOGLE EMAIL ADDRESS LINKED TO YOUR STRAVA ACCOUNT', help = 'Strava username', required=True)
+    parser.add_argument('-su', type = str, metavar = 'strava_email (MUST BE A GOOGLE EMAIL ADDRESS LINKED TO YOUR STRAVA ACCOUNT)', help = 'Strava username', required=True)
     parser.add_argument('-sp', type = str, metavar = 'strava_password', help = 'Strava password', required=True)
     args = parser.parse_args()
             
-    web = Browser()
+    web = Browser(showWindow=False)
     login_r2w(args.ru, args.rp, web)
     tmp = (args.a).split('-')
     start = datetime.date(int(tmp[0]), int(tmp[1]), int(tmp[2]))
@@ -299,5 +303,5 @@ if __name__ == '__main__':
             print('Added 50, total =', count, 'of', len(runs))
         
     web.driver.close()
-    
+    print('Added', count,' activities to Strava')
     
