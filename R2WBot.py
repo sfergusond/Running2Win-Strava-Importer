@@ -263,7 +263,7 @@ if __name__ == '__main__':
     parser.add_argument('-sp', type = str, metavar = 'strava_password', help = 'Strava password', required=True)
     args = parser.parse_args()
             
-    web = Browser(showWindow=False)
+    web = Browser(showWindow=True)
     login_r2w(args.ru, args.rp, web)
     tmp = (args.a).split('-')
     start = datetime.date(int(tmp[0]), int(tmp[1]), int(tmp[2]))
@@ -289,19 +289,19 @@ if __name__ == '__main__':
         
         gathered = runs_to_dict(t)
         runs.extend(gathered)
-        print('Gathered', len(gathered), '| Total: ', len(runs), '| Most Recent:', gathered[-1]['date'])
+        print('Gathered', len(gathered), '| Total:', len(runs), '| Most Recent:', gathered[-1]['date'])
     
     login_strava(args.su, args.sp, web)
     
     count = 0
     for i in runs:
+        pct_done = int(count/len(runs)*100)
         web.go_to('https://www.strava.com/upload/manual')
-        time.sleep(0.25)
         add_strava_entry(i, web)
         count += 1
-        if count % 50 == 0:
-            print('Added 50, total =', count, 'of', len(runs))
+        if count % 10 == 0:
+            print('Added 10 activities to Strava | Total =', count, 'of', len(runs), f'({pct_done}%)')
         
     web.driver.close()
-    print('Added', count,' activities to Strava')
+    print('Successfully added', count,' activities to Strava')
     
