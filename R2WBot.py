@@ -4,8 +4,7 @@ Created on Thu Apr 30 12:04:19 2020
 Author: Spencer Ferguson-Dryden
 https://github.com/sfergusond
 
-TO DO: Implement description-only upload, migrate helper functions out, add Facebook, Apple, Email/PW login options
-
+TO DO: Implement description-only upload, migrate helper functions out, add csv download option instead of upload
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
 
@@ -20,23 +19,28 @@ r2w_run_types = ['VO2 Max', 'Endurance', 'Steady State', 'Hill Training', 'Tempo
 
 r2w_activity_types = ['Aqua Jogging', 'Cycling', 'Elliptical', 'Hiking', 'Cross Training/Other', 'Other', 'NO RUN - OFF']
 
-def login_strava(username, password, web):
+def login_strava(username, password, web, method):
     web.go_to('https:///www.strava.com/login')
-    web.click('Log in using Google')
-    web.type(username, into = 'Email or phone')
-    web.click('Next')
-    time.sleep(2)
-    web.type(password, classname = 'Xb9hP')
-    web.click('Next')
-    time.sleep(1)
+    if method == "Google":
+        web.click('Log in using Google')
+        web.type(username, into = 'Email or phone')
+        web.click('Next')
+        time.sleep(2)
+        web.type(password, classname = 'Xb9hP')
+        web.click('Next')
+    else:
+        web.type(username, id='email')
+        web.type(password, id='password')
+        web.click(id='login-button')
+    time.sleep(0.25)
 
 def login_r2w(username, password, web):
     web.go_to('https://www.running2win.com/')
     web.click('LOG IN')
     time.sleep(2) # Prevent username from failing to enter
-    web.type(username, into='Username')
+    web.type(str(username), into='Username')
     web.click('NEXT' , tag='span')
-    web.type(password, into='Password')
+    web.type(str(password), into='Password')
     web.click('Login')
     
 def log_to_html(html):
@@ -44,7 +48,8 @@ def log_to_html(html):
     runs = soup.find_all("table", class_ ='encapsule')
     
     '''with open('runs.txt', 'w') as f:
-        print(runs, file = f)'''
+        print(runs, file = f)
+        print("runs written")'''
         
     return str(runs)
 
@@ -53,13 +58,13 @@ def get_text(html):
     text = soup.get_text(' | ', strip = True)
     return text
 
-def runs_to_dict(text):
-    text = text[83:]
+def runs_to_dict(html, soup):    
+    html = html[83:]
     
-    text = text[text.find('| , |'):]
-    runs = text.split('| , |')
+    html = html[html.find('| , |'):]
+    runs = html.split('| , |')
     runs = runs[1:]
-        
+    
     master_list = []
         
     for r in runs:
@@ -95,7 +100,7 @@ def runs_to_dict(text):
             description += parse_race(r[r.find('Race Information:') + 31:r.find('| more...')])
             
         if 'Interval Information:' in r:
-            description += parse_intervals(r[r.find('Interval Information'):r.find('| more...')])
+            description += '\n' + parse_intervals(soup)
             
         r = r[r.find('| Workout Comments by Members') + 29:r.find('| Add Workout Comment')] # check for comments
         if len(r) > 1:
@@ -111,13 +116,44 @@ def runs_to_dict(text):
         
     return master_list
 
-def parse_intervals(r): # not yet implemented
-    r = r[r.find('1 |'):]
+def parse_intervals(html): # not yet implemented
     desc = ''
-    grid = r.split(' | ')
-    #print(grid)
+    soup = BeautifulSoup(html, 'lxml')
+    #print(soup)
     
-    return desc    
+    tables = soup.find(string = 'Interval Information:')
+    intervals = tables.parent.parent.parent
+    
+    rows = intervals.tbody.find_all("tr")
+    cols = intervals.find_all("td")
+    headings = []
+    
+    for td in rows[0].find_all("td"):
+        # remove any newlines and extra spaces from left and right
+        headings.append(td.text.replace('\n', ' ').strip())
+        
+    #print(headings)
+    rows = rows[1:]
+    table = []
+    
+    for r in rows:
+        cols = r.find_all("td")
+        tmp = []
+        for c in cols:
+            tmp.append(c.text.replace('\n', '').strip())
+            #print(c.text)
+        table.append(tmp)
+    #print(table)
+    
+    tmp = ' | '.join(['{:^1}'.format(i) for i in headings])
+    desc += tmp + '\n'
+    #print(desc)
+    for r in table:
+        tmp = ' | '.join(['{:^1}'.format(i) for i in r]) + '\n'
+        desc += tmp
+    #print(desc)
+    return desc
+         
 
 def parse_race(r):  
     name = r[:r.find(' |')]
@@ -174,7 +210,6 @@ def parse_comments(r):
     return desc
 
 def parse_distance(distance):
-    import re
     unit = distance[distance.find(' ') + 1:]
     dist = distance[:distance.find(' ')]
     #dist = re.sub("[^0-9]", "", dist)
@@ -250,6 +285,9 @@ def add_strava_entry(run, web):
     web.type(run['description'], id='activity_description')
     
     web.click(xpath='/html/body/div[1]/div[3]/div[1]/form/div[6]/div/input')
+    
+def strava_uploader(su, sp, m, runs, web):
+    return
 
 if __name__ == '__main__':
     import argparse
@@ -261,9 +299,18 @@ if __name__ == '__main__':
     parser.add_argument('-b', type = str, metavar = 'before_date', help = 'Date at which to stop collecting activities form Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--', required=True)
     parser.add_argument('-su', type = str, metavar = 'strava_email (MUST BE A GOOGLE EMAIL ADDRESS LINKED TO YOUR STRAVA ACCOUNT)', help = 'Strava username', required=True)
     parser.add_argument('-sp', type = str, metavar = 'strava_password', help = 'Strava password', required=True)
+    parser.add_argument('-m', type = str, default = "Google", metavar = 'strava_login_method', help = 'Method for logging into Strava', required = False)
+    parser.add_argument('-c', type = str, default = "upload", metavar = 'upload/download type (NOT YET IMPLEMENTED)', help = 'Options:\t\"upload\" to upload all activity data to Strava\n\t\"csv" to import data to a local csv file (no upload)\n\t\"comments\" to only add decriptions/comments to existing Strava activities')
     args = parser.parse_args()
-            
-    web = Browser(showWindow=False)
+    
+    # fix any whitespace issues
+    for a in vars(args):
+        arg = getattr(args, a)
+        if arg[0] == '\'' and arg[-1] == '\'':
+            arg = arg.replace('\'','')
+            setattr(args, a, arg)
+    
+    web = Browser(showWindow=True)
     login_r2w(args.ru, args.rp, web)
     tmp = (args.a).split('-')
     start = datetime.date(int(tmp[0]), int(tmp[1]), int(tmp[2]))
@@ -281,17 +328,19 @@ if __name__ == '__main__':
         start += delta + datetime.timedelta(days=1)
         
         file = web.get_page_source() # convert to html
+        #file = open('log.html', 'r')
         f = log_to_html(file) # store as text/text file
-        #log_to_html(file)
         t = get_text(f) # strip text
-        '''with open('runs.txt', 'r') as f:
-            t = get_text(f)'''
-        
-        gathered = runs_to_dict(t)
+        gathered = runs_to_dict(t, f)
         runs.extend(gathered)
+        '''with open('runs.txt', 'r') as f:
+            t = get_text(f)
+            gathered = runs_to_dict(t, f)
+            runs.extend(gathered)'''
+            
         print('Gathered', len(gathered), '| Total:', len(runs), '| Most Recent:', gathered[-1]['date'])
     
-    login_strava(args.su, args.sp, web)
+    login_strava(args.su, args.sp, web, args.m)
     
     count = 0
     for i in runs:
