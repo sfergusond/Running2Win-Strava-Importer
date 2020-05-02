@@ -19,7 +19,7 @@ Automatically imports desired running2win activity data, including descriptions 
 ```
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 ```
-Then, copy the following and hit ENTER again:  
+Then, copy the following and hit ENTER again:   
 ```
 python get-pip.py
 ```
