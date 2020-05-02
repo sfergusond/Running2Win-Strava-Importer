@@ -3,9 +3,9 @@ Automatically imports desired running2win activity data, including descriptions 
 
 # Instructions
 
-1. Download this repository (green button in the upper right, choose ZIP option)
+1. [Click here to download the program](https://github.com/sfergusond/Running2Win-to-Strava-Importer/archive/master.zip)
 
-2. Unzip the repository into its own folder on your computer. The folder should look like this, note the folder path at the top:
+2. Unzip the downloaded zip file into its own folder on your computer. The folder with the unzipped files should look like this, note the folder path at the top:
 
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
