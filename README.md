@@ -6,9 +6,13 @@ Automatically imports desired running2win activity data, including descriptions 
 3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (make sure you download the installer executable, then run the installer once it finishes downloading. Don't try to download the Python file directly)
 4) Open a command terminal within the folder you unzipped the repository files (Windows and Mac: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/)
 5) Install pip. First, copy the following into the command terminal you just opened and hit ENTER on your keyboard:
-```curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py```
+```
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+```
 Then, copy the following and hit ENTER again:
-```python get-pip.py```
+```
+python get-pip.py
+```
 6) Copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
 7) Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. Make sure to replace everything inside the double quotes (" "), but keep the double quotes, with your information and desired start/end dates.
 8) Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
