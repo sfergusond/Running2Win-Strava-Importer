@@ -5,11 +5,14 @@ Automatically imports desired running2win activity data, including descriptions 
 
 1. Download this repository (green button in the upper right, choose ZIP option)
 
-2. Unzip the repository into its own folder on your computer. 
+2. Unzip the repository into its own folder on your computer. The folder should look like this, note the folder path at the top:
+![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
 3. Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the installer executable, then run the installer once it finishes downloading. __Don't try to download the Python file directly__*)
 
-4. Open a command terminal within the folder you unzipped the repository files. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/)
+4. Open a command terminal within the folder you unzipped the repository files. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) You should see something similar to this:
+
+![step 4]
 
 5. Install pip. First, copy (__if CTRL+V does something weird, right-clicking will paste the copied text instead__) the following into the command terminal you just opened and hit ENTER on your keyboard: 
 ```
