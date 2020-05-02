@@ -3,7 +3,7 @@ Automatically imports desired running2win activity data, including descriptions 
 
 1) Download this repository (green button in the upper right, choose Zip file option)
 2) Unzip the repository into its own folder on your computer.
-3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/
+3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (make sure you download the installer executable, then run the installer once it finishes downloading. Don't try to download the Python file directly)
 4) Open a command terminal within the folder you unzipped the repository files (Mac: https://lifehacker.com/launch-an-os-x-terminal-window-from-a-specific-folder-1466745514) (Windows: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/)
 5) Install pip. See https://pip.pypa.io/en/stable/installing/ for instructions
 6) Type ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
@@ -70,6 +70,6 @@ Note: this will take a long time to run, so it is best to keep your machine on u
 
 Gathers all activity data from Running2Win (not including acticities marked "NO RUN - OFF", "Other", or "Cross Training/Other"), for each activitiy retrieving its activity type, title, distance, time, description, member comments, race information, and interval information.
 
-Uploads each gathered activity from r2w onto your Strava account. 
+Uploads each gathered activity from r2w onto your Strava account. Or, downloads to a CSV file if ```-c "csv"``` is passed as an argument.
 
-In progress: download to CSV option (instead of uploading to Strava), matching Running2Win activity descriptions/race info/interval info/comments to existing Strava activity descriptions rather than creating new activities.
+In progress: matching Running2Win activity descriptions/race info/interval info/comments to existing Strava activity descriptions rather than creating new activities.
