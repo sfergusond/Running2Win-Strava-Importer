@@ -5,7 +5,7 @@ Automatically imports desired running2win activity data, including descriptions 
 
 2. Unzip the repository into its own folder on your computer.
 
-3. Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the installer executable, then run the installer once it finishes downloading. Don't try to download the Python file directly*)
+3. Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the installer executable, then run the installer once it finishes downloading. __Don't try to download the Python file directly__*)
 
 4. Open a command terminal within the folder you unzipped the repository files. See intructions for Windows and Mac: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/
 
@@ -22,9 +22,9 @@ python get-pip.py
 
 6. Next, copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
 
-7. Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. __Make sure to replace everything inside the double quotes (" "), but keep the double quotes, with your information and desired start/end dates.__
-* The first example is probably the one you want to copy unless your Strava account isn't linked to Google.
-* You likely need to use your LEFT and RIGHT arrow keys to navigate the cursor through the input, mouse clicks may not work
+7. Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. The first example is probably the one you want to copy unless your Strava account isn't linked to Google.
+
+__Make sure to replace everything inside the double quotes (" "), but keep the double quotes, with your information and desired start/end dates. You likely need to use your LEFT and RIGHT arrow keys to navigate the cursor through the input, mouse clicks may not work__
 
 8. Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
 
