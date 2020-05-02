@@ -6,13 +6,14 @@ Automatically imports desired running2win activity data, including descriptions 
 1. Download this repository (green button in the upper right, choose ZIP option)
 
 2. Unzip the repository into its own folder on your computer. The folder should look like this, note the folder path at the top:
+
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
 3. Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the installer executable, then run the installer once it finishes downloading. __Don't try to download the Python file directly__*)
 
 4. Open a command terminal within the folder you unzipped the repository files. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) You should see something similar to this:
 
-![step 4]
+![step4](https://github.com/sfergusond/imgdump/blob/master/step%203.png?raw=true)
 
 5. Install pip. First, copy (__if CTRL+V does something weird, right-clicking will paste the copied text instead__) the following into the command terminal you just opened and hit ENTER on your keyboard: 
 ```
@@ -23,7 +24,13 @@ Then, copy the following and hit ENTER again:
 python get-pip.py
 ```
 
-6. Next, copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
+After completing both, your terminal should resemble something like this:
+
+![step5](https://github.com/sfergusond/imgdump/blob/master/step5.png?raw=true)
+
+6. Next, copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard:
+
+![step6](https://github.com/sfergusond/imgdump/blob/master/step6.png?raw=true)
 
 7. Copy an example from below into the command line. Option 1 is most likely what you want to use. If you don't use Google to login to Strava, use Option 2 with either `-m "Email"` or `-m "Facebook"` depending on how you login to Strava. __Make sure to replace everything inside double quotes (" "), but keep the double quotes, with your information and desired start/end dates.__ You likely need to use your LEFT and RIGHT arrow keys to navigate the cursor through the input once you paste it into your command terminal, mouse clicks may not work.
 
@@ -31,6 +38,9 @@ _Option 1:_
 ```
 python R2WBot.py -ru "r2wusername" -rp "r2wpassword" -a "2016-05-31" -b "2020-04-01" -su "stravausername1" -sp "stravapassword"
 ```
+In your terminal, it would look like this:
+
+![step7](https://github.com/sfergusond/imgdump/blob/master/last%20step.png?raw=true)
 
 _Option 2:_
 ```
@@ -39,7 +49,9 @@ python R2WBot.py -ru "r2wusername" -rp "r2wpassword" -a "2016-05-31" -b "2020-04
 
 8. Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs. __Do not close the terminal window while the program runs__, print statements will notify you of the program's progress.
 
-9. Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with a new start date (change the ```-a``` flag). _You can use the UP or DOWN arrow keys to load previously run commands into the current command prompt instead of retyping everything_
+9. Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with a new start date (change the ```-a``` flag). _You can use the UP or DOWN arrow keys to load previously run commands into the current command prompt instead of retyping everything_ The image belows displays the output if the program is running sucessfully. The gathered statements show the progress of downloading activities from Running2Win while the Added to Strava statements show the progress of uploading your activities to Strava.
+
+![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
 Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. __It does not work with Apple logins__. Make sure the login method flag is set appropriately.
 
