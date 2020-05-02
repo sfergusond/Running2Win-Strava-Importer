@@ -13,10 +13,10 @@ Automatically imports desired running2win activity data, including descriptions 
 ```
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 ```
-       \Then, copy the following and hit ENTER again:  
+Then, copy the following and hit ENTER again:  
 ```
 python get-pip.py
-`
+```
 
 6. Next, copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
 
@@ -26,12 +26,11 @@ __Make sure to replace everything inside the double quotes (" "), but keep the d
 
 8. Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
 
-9. Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with a new start date (change the ```-a``` flag).
-  * You can use the UP or DOWN arrow keys to load previously run commands into the current command prompt instead of retyping everything
+9. Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with a new start date (change the ```-a``` flag). _You can use the UP or DOWN arrow keys to load previously run commands into the current command prompt instead of retyping everything_
 
-Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. It does not work with Apple logins. Make sure the login method flag is set appropriately.
+Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. __It does not work with Apple logins__. Make sure the login method flag is set appropriately.
 
-Note: Usernames and passwords are not stored by the program
+__Note: Usernames and passwords are not stored by the program__
 
 # Usage
 
