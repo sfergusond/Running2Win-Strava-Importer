@@ -1,7 +1,7 @@
 # Running2Win-to-Strava-Importer
 Automatically imports desired running2win activity data, including descriptions and comments, into Strava
 
-1) Download this repository (green button in the upper right, choose Zip file option)
+1) Download this repository (green button in the upper right, choose ZIP option)
 2) Unzip the repository into its own folder on your computer.
 3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (make sure you download the installer executable, then run the installer once it finishes downloading. Don't try to download the Python file directly)
 4) Open a command terminal within the folder you unzipped the repository files (Mac: https://lifehacker.com/launch-an-os-x-terminal-window-from-a-specific-folder-1466745514) (Windows: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/)
@@ -9,9 +9,11 @@ Automatically imports desired running2win activity data, including descriptions 
 6) Type ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
 7) Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. Make sure to replace everything inside the double quotes (" "), but keep the double quotes, with your information and desired start/end dates.
 8) Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
-9) Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with the new start date.
+9) Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with a new start date (change the ```-a``` flag).
 
 Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. It does not work with Apple logins. Make sure the login method flag is set appropriately.
+
+Note: Usernames and passwords are not stored by the program
 
 # Usage
 
@@ -24,24 +26,28 @@ Retrieve R2W data and upload to Strava --- PUT ALL ARGUMENTS IN DOUBLE QUOTES | 
 required arguments:
   -ru r2w_username      Running2Win username
   -rp r2w_password      Running2Win password
-  -a after_date         Date after which to search for activities on
-                        Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--
-  -b before_date        Date at which to stop collecting activities form
-                        Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--
-  -su strava_email      Strava username (MUST BE A GOOGLE EMAIL ADDRESS LINKED TO YOUR STRAVA ACCOUNT)
-  -sp strava_password   Strava password 
+  -a after_date         Date of first activity to import from Running2Win 
+                        MUST BE IN FORMAT: YYYY-MM-DD
+  -b before_date        Date of last activity to import from Running2Win
+                        MUST BE IN FORMAT: YYYY-MM-DD
+  -su strava_email      Username/email for Strava/Google/Facebook account, 
+                        depending on the value of the -m flag (see below)
+  -sp strava_password   Password for Strava/Google/Facebook account, 
+                        depending on the value of the -m flag (see below)
 
 optional arguments:
   -h, --help            show this help message and exit
   -m Strava_login_method
                         Method for logging into Strava, default is Google sign-in
+                        Default: "Google" (if you do not include this argument, 
+                        it will default to Google sign-in)
                         Options: "Email" login to Strava via direct email/password combination
                                  "Facebook" login to Strava using Facebook
                                  "Google" login to Strava using Google
   -c upload/download type 
+                        Default: "upload" (if you do not include this argument, activities will be uploaded to Strava)
                         Options: "upload" to upload all activity data to Strava 
-                                 "csv" to import data to a local csv file (no upload) 
-                                 "comments" to only add decriptions/comments to existing Strava activities (NOT IMPLEMENTED)
+                                 "csv" to import data to a local csv file (no upload)
 ```
 
 # Examples
