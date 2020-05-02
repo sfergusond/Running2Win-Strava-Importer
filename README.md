@@ -36,7 +36,12 @@ optional arguments:
   -m Strava_login_method
                         Method for logging into Strava, default is Google sign-in
                         Options: "Email" login to Strava via direct email/password combination
-                                 "Facebook" login to Strava using Facebook information
+                                 "Facebook" login to Strava using Facebook
+                                 "Google" login to Strava using Google
+  -c upload/download type 
+                        Options: "upload" to upload all activity data to Strava 
+                                 "csv" to import data to a local csv file (no upload) 
+                                 "comments" to only add decriptions/comments to existing Strava activities (NOT IMPLEMENTED)
 ```
 
 # Examples
@@ -52,6 +57,12 @@ python R2WBot.py -ru "runner1" -rp "password1" -a "2016-05-31" -b "2020-04-01" -
 ```
 
 This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). Rather than attempting a Google sign-in, the bot will directly enter the given Strava usser's email and password into the fields on www.strava.com/login.
+
+```
+python R2WBot.py -ru "runner1" -rp "password1" -a "2016-05-31" -b "2020-04-01" -su "stravarunner1" -sp "password2" -c "csv"
+```
+
+This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). The activities will be downloaded to a file named "activities.csv" in the same directory as the code. The program will not attempt to login or upload to Strava.
 
 Note: this will take a long time to run, so it is best to keep your machine on until the upload is complete
 
