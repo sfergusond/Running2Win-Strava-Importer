@@ -34,6 +34,8 @@ After completing both, your terminal should resemble something like this:
 
 ![step6](https://github.com/sfergusond/imgdump/blob/master/step6.png?raw=true)
 
+If that didn't work, try using this command instead: `python -m pip install -r requirements.txt`
+
 7. You're ready to run the importer! First, opy an example from below into the command line. Option 1 is most likely what you want to use. If you don't use Google to login to Strava, use Option 2 with either `-m "Email"` or `-m "Facebook"` depending on how you login to Strava. __Then, make sure to replace everything inside double quotes (" "), but keep the double quotes, with your information and desired after/before dates.__ You likely need to use your LEFT and RIGHT arrow keys to navigate the cursor through the input once you paste it into your command terminal, mouse clicks may not work.
 
 _Option 1:_
