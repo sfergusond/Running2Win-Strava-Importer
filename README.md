@@ -7,11 +7,11 @@ Automatically imports running2win activity data, including descriptions and comm
 
 2. Unzip the downloaded zip file into its own folder on your computer. The folder with the unzipped files should look like this, note the folder path at the top:
 
-![step1](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
+![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
 3. Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the installer executable, then run the installer once it finishes downloading. Check the "Add Python3.7 to PATH" box. __Don't try to download the Python file directly__*) __Also, make sure you have Chrome downloaded on your computer__
 
-![install](
+![install](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
 
 4. Open a command terminal within the folder you unzipped the repository files. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
 
