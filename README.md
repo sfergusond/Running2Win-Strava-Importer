@@ -5,26 +5,29 @@ Automatically imports desired running2win activity data, including descriptions 
 
 2) Unzip the repository into its own folder on your computer.
 
-3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (make sure you download the installer executable, then run the installer once it finishes downloading. Don't try to download the Python file directly)
+3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the installer executable, then run the installer once it finishes downloading. Don't try to download the Python file directly*)
 
-4) Open a command terminal within the folder you unzipped the repository files (Windows and Mac: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/)
+4) Open a command terminal within the folder you unzipped the repository files. See intructions for Windows and Mac: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/
 
 5) Install pip. First, copy the following into the command terminal you just opened and hit ENTER on your keyboard:
 ```
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 ```
-  Then, copy the following and hit ENTER again:
+      Then, copy the following and hit ENTER again:
 ```
 python get-pip.py
 ```
 
-6) Copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
+6) Next, copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
 
 7) Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. Make sure to replace everything inside the double quotes (" "), but keep the double quotes, with your information and desired start/end dates.
+  * The first example is probably the one you want to copy unless your Strava account isn't linked to Google.
+  * You likely need to use your LEFT and RIGHT arrow keys to navigate the cursor through the input, mouse clicks may not work
 
 8) Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
 
 9) Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with a new start date (change the ```-a``` flag).
+  * You can use the UP or DOWN arrow keys to load previously run commands into the current command prompt instead of retyping everything
 
 Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. It does not work with Apple logins. Make sure the login method flag is set appropriately.
 
