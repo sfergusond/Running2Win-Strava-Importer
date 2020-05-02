@@ -1,4 +1,4 @@
-# Running2Win-Strava-Importer
+# Running2Win-Strava Importer
 Automatically imports running2win activity data, including descriptions and comments, into Strava or downloads to a CSV file
 
 # Instructions
