@@ -91,7 +91,7 @@ Note: this will take a long time to run, you must keep your machine on until the
 
 ```
 usage: R2Wbot.py \[-h] -ru r2w_username -rp r2w_password -a after_date -b
-                 before_date -su strava_email -sp strava_password 
+                 before_date [-su strava_email] [-sp strava_password] 
                  [-m strava_login_method] [-c upload/download type]
 
 Retrieve R2W data and upload to Strava --- PUT ALL ARGUMENTS IN DOUBLE QUOTES | ex: -ru "myr2wusername" ---
