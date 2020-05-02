@@ -1,8 +1,6 @@
 # Running2Win-to-Strava-Importer
 Automatically imports desired running2win activity data, including descriptions and comments, into Strava
 
-[![Run on Repl.it](https://repl.it/badge/github/sfergusond/Running2Win-to-Strava-Importer)](https://repl.it/github/sfergusond/Running2Win-to-Strava-Importer)
-
 1) Download this repository (green button in the upper right, choose Zip file option)
 2) Unzip the repository into its own folder on your computer.
 3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/
