@@ -25,7 +25,7 @@ def login_strava(username, password, web, method):
         web.click('Log in using Google')
         web.type(username, into = 'Email or phone')
         web.click('Next')
-        time.sleep(2)
+        time.sleep(3)
         web.type(password, classname = 'Xb9hP')
         web.click('Next')
     elif method == 'Facebook':
@@ -37,7 +37,7 @@ def login_strava(username, password, web, method):
         web.type(username, id='email')
         web.type(password, id='password')
         web.click(id='login-button')
-    time.sleep(0.25)
+    time.sleep(5)
 
 def login_r2w(username, password, web):
     web.go_to('https://www.running2win.com/')
@@ -63,7 +63,8 @@ def get_text(html):
     text = soup.get_text(' | ', strip = True)
     return text
 
-def runs_to_dict(html, soup):    
+def runs_to_dict(html, soup):  
+    from bs4 import BeautifulSoup
     html = html[83:]
     
     html = html[html.find('| , |'):]
@@ -71,6 +72,10 @@ def runs_to_dict(html, soup):
     runs = runs[1:]
     
     master_list = []
+    interval_count = 0
+    
+    s = BeautifulSoup(soup, 'lxml')
+    interval_tables = s.find_all(string = 'Interval Information:')
         
     for r in runs:
         #print(r)
@@ -105,7 +110,8 @@ def runs_to_dict(html, soup):
             description += parse_race(r[r.find('Race Information:') + 31:r.find('| more...')])
             
         if 'Interval Information:' in r:
-            description += '\n' + parse_intervals(soup)
+            description += '\n' + parse_intervals(interval_tables[interval_count])
+            interval_count += 1
             
         r = r[r.find('| Workout Comments by Members') + 29:r.find('| Add Workout Comment')] # check for comments
         if len(r) > 1:
@@ -121,20 +127,15 @@ def runs_to_dict(html, soup):
         
     return master_list
 
-def parse_intervals(html): # not yet implemented
+def parse_intervals(table): # not yet implemented
     desc = ''
-    soup = BeautifulSoup(html, 'lxml')
-    #print(soup)
-    
-    tables = soup.find(string = 'Interval Information:')
-    intervals = tables.parent.parent.parent
+    intervals = table.parent.parent.parent
     
     rows = intervals.tbody.find_all("tr")
     cols = intervals.find_all("td")
     headings = []
     
     for td in rows[0].find_all("td"):
-        # remove any newlines and extra spaces from left and right
         headings.append(td.text.replace('\n', ' ').strip())
         
     #print(headings)
@@ -152,13 +153,12 @@ def parse_intervals(html): # not yet implemented
     
     tmp = ' | '.join(['{:^1}'.format(i) for i in headings])
     desc += tmp + '\n'
-    #print(desc)
+
     for r in table:
         tmp = ' | '.join(['{:^1}'.format(i) for i in r]) + '\n'
         desc += tmp
-    #print(desc)
-    return desc
-         
+
+    return desc         
 
 def parse_race(r):  
     name = r[:r.find(' |')]
@@ -250,7 +250,6 @@ def parse_date(date):
     return d
 
 def add_strava_entry(run, web):
-    #web.click(id='activity_distance')
     web.type(run['distance'], id='activity_distance')
     
     web.click('NEXT', tag = 'span')
@@ -294,27 +293,8 @@ def add_strava_entry(run, web):
 def strava_uploader(su, sp, m, runs, web):
     return
 
-if __name__ == '__main__':
-    import argparse
-    
-    parser = argparse.ArgumentParser(description='Retrieve R2W data and upload to Strava -- PUT ALL ARGUMENTS IN DOUBLE QUOTES | ex: -ru \"myr2wusername\" ---')
-    parser.add_argument('-ru', type = str, metavar = 'r2w_username', help = 'Running2Win username', required=True)
-    parser.add_argument('-rp', type = str, metavar = 'r2w_password', help = 'Running2Win password', required=True)
-    parser.add_argument('-a', type = str, metavar = 'after_date', help = 'Date after which to search for activities on Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--', required=True)
-    parser.add_argument('-b', type = str, metavar = 'before_date', help = 'Date at which to stop collecting activities form Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--', required=True)
-    parser.add_argument('-su', type = str, metavar = 'strava_email (MUST BE A GOOGLE EMAIL ADDRESS LINKED TO YOUR STRAVA ACCOUNT)', help = 'Strava username', required=True)
-    parser.add_argument('-sp', type = str, metavar = 'strava_password', help = 'Strava password', required=True)
-    parser.add_argument('-m', type = str, default = "Google", metavar = 'strava_login_method', help = 'Method for logging into Strava', required = False)
-    parser.add_argument('-c', type = str, default = "upload", metavar = 'upload/download type (NOT YET IMPLEMENTED)', help = 'Options:\t\"upload\" to upload all activity data to Strava\n\t\"csv" to import data to a local csv file (no upload)\n\t\"comments\" to only add decriptions/comments to existing Strava activities')
-    args = parser.parse_args()
-    
-    # fix any whitespace issues
-    for a in vars(args):
-        arg = getattr(args, a)
-        if arg[0] == '\'' and arg[-1] == '\'':
-            arg = arg.replace('\'','')
-            setattr(args, a, arg)
-    
+def driver(args):
+    import sys
     web = Browser(showWindow=True)
     login_r2w(args.ru, args.rp, web)
     tmp = (args.a).split('-')
@@ -344,6 +324,21 @@ if __name__ == '__main__':
             runs.extend(gathered)'''
             
         print('Gathered', len(gathered), '| Total:', len(runs), '| Most Recent:', gathered[-1]['date'])
+        
+    if args.c == 'csv':
+        import pandas as pd
+        for a in runs:
+            tmp = a['time']
+            if tmp[0] == 0:
+                time = f'{tmp[1]}:{tmp[2]}'
+            else:
+                time = f'{tmp[0]}:{tmp[1]}:{tmp[2]}'
+            a['time'] = time
+    
+        pd.DataFrame(runs).to_csv('activities.csv', index=False)
+        print('Done')
+        web.driver.close()
+        sys.exit()
     
     login_strava(args.su, args.sp, web, args.m)
     
@@ -358,4 +353,27 @@ if __name__ == '__main__':
         
     web.driver.close()
     print('Successfully added', count,' activities to Strava')
+    sys.exit()
+
+if __name__ == '__main__':
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Retrieve R2W data and upload to Strava -- PUT ALL ARGUMENTS IN DOUBLE QUOTES | ex: -ru \"myr2wusername\" ---')
+    parser.add_argument('-ru', type = str, metavar = 'r2w_username', help = 'Running2Win username', required=True)
+    parser.add_argument('-rp', type = str, metavar = 'r2w_password', help = 'Running2Win password', required=True)
+    parser.add_argument('-a', type = str, metavar = 'after_date', help = 'Date after which to search for activities on Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--', required=True)
+    parser.add_argument('-b', type = str, metavar = 'before_date', help = 'Date at which to stop collecting activities form Running2Win --!! MUST BE IN FORMAT: YYYY-MM-DD !!--', required=True)
+    parser.add_argument('-su', type = str, metavar = 'strava_email (MUST BE A GOOGLE EMAIL ADDRESS LINKED TO YOUR STRAVA ACCOUNT)', help = 'Strava username', required=True)
+    parser.add_argument('-sp', type = str, metavar = 'strava_password', help = 'Strava password', required=True)
+    parser.add_argument('-m', type = str, default = "Google", metavar = 'strava_login_method', help = 'Method for logging into Strava', required = False)
+    parser.add_argument('-c', type = str, default = "upload", metavar = 'upload/download type (NOT YET IMPLEMENTED)', help = 'Options:\t\"upload\" to upload all activity data to Strava\n\t\"csv" to import data to a local csv file (no upload)\n\t\"comments\" to only add decriptions/comments to existing Strava activities')
+    args = parser.parse_args()
+    
+    # fix any whitespace issues
+    for a in vars(args):
+        arg = getattr(args, a)
+        if arg[0] == '\'' and arg[-1] == '\'':
+            arg = arg.replace('\'','')
+            setattr(args, a, arg)
+    driver(args)
     
