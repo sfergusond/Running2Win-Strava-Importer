@@ -1,8 +1,7 @@
 # Running2Win-to-Strava-Importer
 Automatically imports desired running2win activity data, including descriptions and comments, into Strava
 
-<li> d<li>
-1) Download this repository (green button in the upper right, choose ZIP option)
+<li>1)<li> Download this repository (green button in the upper right, choose ZIP option)
 2) Unzip the repository into its own folder on your computer.
 3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (make sure you download the installer executable, then run the installer once it finishes downloading. Don't try to download the Python file directly)
 4) Open a command terminal within the folder you unzipped the repository files (Windows and Mac: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/)
