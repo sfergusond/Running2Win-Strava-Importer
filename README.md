@@ -47,9 +47,9 @@ _Option 2:_
 python R2WBot.py -ru "r2wusername" -rp "r2wpassword" -a "2016-05-31" -b "2020-04-01" -su "stravausername1" -sp "stravapassword" -m "Email"
 ```
 
-8. Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs. __Do not close the terminal window while the program runs__, print statements will notify you of the program's progress.
+8. Hit ENTER on your keyboard and let the program run. It will take a while (about 20 seconds per activity, you do the math). Avoid logging into your Strava account while the program runs. __Do not close the terminal window while the program runs__, print statements will notify you of the program's progress.
 
-9. Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with a new start date (change the ```-a``` flag). _You can use the UP or DOWN arrow keys to load previously run commands into the current command prompt instead of retyping everything_ The image belows displays the output if the program is running sucessfully. The gathered statements show the progress of downloading activities from Running2Win while the Added to Strava statements show the progress of uploading your activities to Strava.
+9. If for some reason the program is interrupted, go to Strava and check the date of the most recent activity that was uploaded. Then, run the program again from step 7 with a new start date (change the ```-a``` flag). _You can use the UP or DOWN arrow keys to load previously run commands into the current command prompt instead of retyping everything_ The image belows displays the output if the program is running sucessfully. The gathered statements show the progress of downloading activities from Running2Win while the Added to Strava statements show the progress of uploading your activities to Strava.
 
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
