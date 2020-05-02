@@ -15,7 +15,7 @@ Automatically imports desired running2win activity data, including descriptions 
 
 ![step4](https://github.com/sfergusond/imgdump/blob/master/step%203.png?raw=true)
 
-5. Install pip. First, copy (__if CTRL+V does something weird, right-clicking will paste the copied text instead__) the following into the command terminal you just opened and hit ENTER on your keyboard: 
+5. Install pip. First, copy/paste the following into the command terminal (__if CTRL+V does something weird, right-clicking will paste the copied text instead__) you just opened and hit ENTER on your keyboard: 
 ```
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 ```
