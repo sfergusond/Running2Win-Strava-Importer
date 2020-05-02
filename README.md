@@ -9,12 +9,11 @@ Automatically imports desired running2win activity data, including descriptions 
 
 4. Open a command terminal within the folder you unzipped the repository files. See intructions for Windows and Mac: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/
 
-5. Install pip. First, copy the following into the command terminal you just opened and hit ENTER on your keyboard:
-`
-curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+5. Install pip. First, copy the following into the command terminal you just opened and hit ENTER on your keyboard: 
+```curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 `
 Then, copy the following and hit ENTER again:      
-`
+```
 python get-pip.py
 `
 
