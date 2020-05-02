@@ -103,13 +103,13 @@ required arguments:
                         MUST BE IN FORMAT: YYYY-MM-DD
   -b before_date        Date of last activity to import from Running2Win
                         MUST BE IN FORMAT: YYYY-MM-DD
+
+optional arguments:
+  -h, --help            show this help message and exit
   -su strava_email      Username/email for Strava/Google/Facebook account, 
                         depending on the value of the -m flag (see below)
   -sp strava_password   Password for Strava/Google/Facebook account, 
                         depending on the value of the -m flag (see below)
-
-optional arguments:
-  -h, --help            show this help message and exit
   -m Strava_login_method
                         Method for logging into Strava, default is Google sign-in
                         Default: "Google" (if you do not include this argument, 
