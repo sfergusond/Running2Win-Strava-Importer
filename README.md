@@ -1,9 +1,9 @@
-# Running2Win-to-Strava-Importer
+# Running2Win-Strava-Importer
 Automatically imports running2win activity data, including descriptions and comments, into Strava or downloads to a CSV file
 
 # Instructions
 
-1. [Click here to download the program](https://github.com/sfergusond/Running2Win-to-Strava-Importer/archive/master.zip)
+1. [Click here to download the program](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
 
 2. Unzip the downloaded zip file into its own folder on your computer. The folder with the unzipped files should look like this, note the folder path at the top:
 
