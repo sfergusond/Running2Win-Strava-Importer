@@ -3,17 +3,15 @@ Automatically imports desired running2win activity data, including descriptions 
 
 [![Run on Repl.it](https://repl.it/badge/github/sfergusond/Running2Win-to-Strava-Importer)](https://repl.it/github/sfergusond/Running2Win-to-Strava-Importer)
 
-1) Click above button
-```
-      a. If the link doesn't work: go to www.repl.it
-      b. Click "Start Coding <>" in the upper right
-      c. Select "Import from Github"
-      d. Copy "sfergusond/Running2Win-to-Strava-Importer" and import
-```
-2) Type ```pip install -r requirements.txt``` into the command line (black window with an orange ">", should show a blinking white cursor on click) and hit ENTER on your keyboard
-3) Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
-4) Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
-5) Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 3) with the new start date.
+1) Download this repository (green button in the upper right, choose Zip file option)
+2) Unzip the repository into its own folder on your computer.
+3) Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/
+4) Open a command terminal within the folder you unzipped the repository files (Mac: https://lifehacker.com/launch-an-os-x-terminal-window-from-a-specific-folder-1466745514) (Windows: https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/)
+5) Install pip. See https://pip.pypa.io/en/stable/installing/ for instructions
+6) Type ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
+7) Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. Make sure to replace everything inside the double quotes (" ") with your information and desired start/end dates.
+8) Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
+9) Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 7) with the new start date.
 
 Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. It does not work with Apple logins. Make sure the login method flag is set appropriately.
 
