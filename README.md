@@ -9,7 +9,7 @@ Automatically imports desired running2win activity data, including descriptions 
 
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
-3. Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the installer executable, then run the installer once it finishes downloading. __Don't try to download the Python file directly__*)
+3. Make sure you have Python3 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the installer executable, then run the installer once it finishes downloading. __Don't try to download the Python file directly__*) __Also, make sure you have Chrome downloaded on your computer__
 
 4. Open a command terminal within the folder you unzipped the repository files. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
 
