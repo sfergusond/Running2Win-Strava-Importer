@@ -20,9 +20,17 @@ python get-pip.py
 
 6. Next, copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard
 
-7. Once the packages have been installed, type desired arguments into the command line. Alternatively, copy an example from below into the command line. The first example is probably the one you want to copy unless your Strava account isn't linked to Google.
+7. Copy an example from below into the command line. Option 1 is most likely what you want to use. If you don't use Google to login to Strava, use Option 2 with either `-m "Email"` or `-m "Facebook"` depending on how you login to Strava. __Make sure to replace everything inside double quotes (" "), but keep the double quotes, with your information and desired start/end dates.__ You likely need to use your LEFT and RIGHT arrow keys to navigate the cursor through the input once you paste it into your command terminal, mouse clicks may not work.
 
-__Make sure to replace everything inside the double quotes (" "), but keep the double quotes, with your information and desired start/end dates. You likely need to use your LEFT and RIGHT arrow keys to navigate the cursor through the input, mouse clicks may not work__
+_Option 1:_
+```
+python R2WBot.py -ru "r2wusername" -rp "r2wpassword" -a "2016-05-31" -b "2020-04-01" -su "stravausername1" -sp "stravapassword"
+```
+
+_Option 2:_
+```
+python R2WBot.py -ru "r2wusername" -rp "r2wpassword" -a "2016-05-31" -b "2020-04-01" -su "stravausername1" -sp "stravapassword" -m "Email"
+```
 
 8. Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
 
