@@ -15,7 +15,7 @@ Automatically imports desired running2win activity data, including descriptions 
 4) Hit ENTER on your keyboard and let the program run. It will take a while. Avoid logging into your Strava account while the program runs.
 5) Strava.com may timeout before all of your activities are loaded. If so, check the date of the most recent activity that was uploaded and run the program again (from step 3) with the new start date.
 
-Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. It does not work with Apple or Facebook logins. Make sure the login method flag is set appropriately.
+Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. It does not work with Apple logins. Make sure the login method flag is set appropriately.
 
 # Usage
 
