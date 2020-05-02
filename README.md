@@ -68,19 +68,19 @@ __Note: Usernames and passwords are not stored by the program__
 # Examples
 
 ```
-python R2WBot.py -ru "r2wusername" -rp "r2wpassword" -a "2016-05-31" -b "2020-04-01" -su "stravausername1" -sp "stravapassword"
+python R2WBot.py -ru "r2w_username" -rp "r2w_password" -a "2016-05-31" -b "2020-04-01" -su "strava_username1" -sp "strava_password"
 ```
 
 This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). The program will attempt to sign-in to Strava via Google. The activities will then be uploaded automatically to Strava. 
 
 ```
-python R2WBot.py -ru "r2wusername" -rp "r2wpassword" -a "2016-05-31" -b "2020-04-01" -su "stravausername1" -sp "stravapassword" -m "Email"
+python R2WBot.py -ru "r2w_username" -rp "r2w_password" -a "2016-05-31" -b "2020-04-01" -su "strava_username1" -sp "strava_password" -m "Email"
 ```
 
 This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). Rather than attempting a Google sign-in, the bot will directly enter the given Strava user's email and password into the fields on www.strava.com/login. The activities will then be uploaded to Strava.
 
 ```
-python R2WBot.py -ru "r2wusername" -rp "r2wpassword" -a "2016-05-31" -b "2020-04-01" -c "csv"
+python R2WBot.py -ru "r2w_username" -rp "r2w_password" -a "2016-05-31" -b "2020-04-01" -c "csv"
 ```
 
 This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). The activities will be downloaded to a file named "activities.csv" in the same directory as the code. The program will not attempt to login or upload to Strava.
