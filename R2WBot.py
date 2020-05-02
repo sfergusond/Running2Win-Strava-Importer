@@ -127,7 +127,7 @@ def runs_to_dict(html, soup):
         
     return master_list
 
-def parse_intervals(table): # not yet implemented
+def parse_intervals(table): 
     desc = ''
     intervals = table.parent.parent.parent
     
@@ -295,7 +295,7 @@ def strava_uploader(su, sp, m, runs, web):
 
 def driver(args):
     import sys
-    web = Browser(showWindow=True)
+    web = Browser(showWindow=False)
     login_r2w(args.ru, args.rp, web)
     tmp = (args.a).split('-')
     start = datetime.date(int(tmp[0]), int(tmp[1]), int(tmp[2]))
