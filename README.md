@@ -1,6 +1,8 @@
 # Running2Win-to-Strava-Importer
 Automatically imports desired running2win activity data, including descriptions and comments, into Strava
 
+# Instructions
+
 1. Download this repository (green button in the upper right, choose ZIP option)
 
 2. Unzip the repository into its own folder on your computer. 
