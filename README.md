@@ -16,7 +16,7 @@ Click the link to the right to install Python (if you already have it, it must b
 ### 3) Run R2WImporter.py
 Right click on R2WImporter.py in folder from step 2. Choose "Open With..." > "Python Launcher". A bunch of stuff will download.
 
-_If any errors occur at this point, follow the Windows instructions below from step 4._
+_If this doesn't work, follow the Windows instructions below from step 4._
 
 ### 4) Enter login info and date filters
 After you see "Starting R2W Importer" appear, the program will prompt you to enter your Running2Win login info, two dates, an upload (to Strava) or download (to a .csv file) option, your Strava login method (Google, Facebook, or direct Email/Password entry), and your Strava login info. 
@@ -30,27 +30,30 @@ __Do not close the terminal window while the program runs or hit Command+C in th
 
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
-### If the program quits unexpectedly or becomes stuck for more than a couple minutes:
-1) Close and re-open the terminal window
-2) Go to Strava and check the date of the most recent activity that was uploaded
-3) Re-run the program by copy/pasting `python R2WImporter.py i` 
-4) Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
+### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes:
+1) If the program won't run, [watch this 2.5 minute video](https://www.youtube.com/watch?v=Txt-cLLa_vo). [Open a terminal in the folder from step 2](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/), copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` and hit ENTER. Then type `python get-pip.py` and hit ENTER. Then type `python3 R2WImporter.py` and ENTER. You should be good to go.
+2) If the program quits before all your runs are uploaded, or becomes stuck:
+  - Close and re-open the terminal window and/or Python Launcher
+  - Go to Strava and check the date of the most recent activity that was uploaded
+  - Re-run the program with Python Launcher
+  - Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
 
 # Instructions for Windows
 
 ### 1) Download the code
 [Click here to download the zip folder with the program files](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
+
 ### 2) Extract files into separate folder
 Double click on `Running2Win-Strava-Importer-master.zip` to extract all the files from into their own folder. The folder should contain the following files:
-
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
+
 ### 3) Install Python
 Install Python (if you already have it, it must be at least Python3.7). ([Windows installer](https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe)) Then, run the installer. For Windows, check the "Add Python to PATH" box. __While you're at this step, download Chrome on your computer if you haven't already, it is required for the program to work__
 
 ![install](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
 
 ### 4) Open a Command Terminal in the folder from step 2
-Open a command terminal within the folder you made in step 2. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
+Open a command terminal within the folder you made in step 2 by SHIFT+Right-clicking on the folder and selecting "Open Powershell window here". [Click here for Mac instructions](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
 
 ![step4](https://github.com/sfergusond/imgdump/blob/master/step%203.png?raw=true)
 ### 5) Run the program
@@ -68,11 +71,13 @@ __Do not close the terminal window while the program runs or hit CTRL+C in the t
 
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
-### If the program quits unexpectedly or becomes stuck for more than a couple minutes:
-1) Close and re-open the terminal window
-2) Go to Strava and check the date of the most recent activity that was uploaded
-3) Re-run the program by copy/pasting `python R2WImporter.py i` 
-4) Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
+### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes:
+1) If the program won't run, copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` and hit ENTER. Then type `python get-pip.py` and hit ENTER. Then type `python R2WImporter.py` and ENTER. You should be good to go.
+2) If the program quits before all your runs are uploaded, or becomes stuck:
+  - Close and re-open the terminal window
+  - Go to Strava and check the date of the most recent activity that was uploaded
+  - Re-run the program with Python Launcher
+  - Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
 
 # Features 
 
