@@ -8,7 +8,11 @@ Automatically imports running2win activity data, including descriptions and comm
 
 ### 2) Extract files
 Double click on "Running2Win-Strava-Importer-master.zip" to extract all the files into their own folder (it'll be called "Running2Win-Strava-Importer-master"). The folder should contain the following files:
-![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
+  * LICENSE
+  * r2w_parser.py
+  * R2WImporter.py
+  * README.md
+  * requirements.txt
 
 ### 3) Install Python
 Click the link to the right to install Python (if you already have it, it must be at least Python3.7) ([Mac installer](https://www.python.org/ftp/python/3.8.3/python-3.8.3rc1-macosx10.9.pkg)). Then, run the installer. __While you're at this step, download Chrome on your computer if you haven't already, it is required for the program to work.__
@@ -32,11 +36,11 @@ __Do not close the terminal window while the program runs or hit Command+C in th
 
 ### If the program won't run:
 
-1) [watch this 2.5 minute video](https://www.youtube.com/watch?v=Txt-cLLa_vo). 
-2) [Open a terminal in the folder containing "R2WImporter.py" (from step 2)](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) 
-3) Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` and hit ENTER. 
+1) 
+2) Open a terminal in the folder containing "R2WImporter.py" (from step 2). [INSTRUCTIONS](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) [*or, watch this 2.5 minute video*](https://www.youtube.com/watch?v=Txt-cLLa_vo)
+3) Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` into the terminal where the `$ ` and blinking cursor is and hit ENTER. 
 4) Copy/paste `python get-pip.py` and hit ENTER. 
-5) Copy/paste `python3 -m pip install -r requirements.txt`
+5) Copy/paste `python3 -m pip install -r requirements.txt` and hit ENTER.
 5) Copy/paste `python3 R2WImporter.py` and ENTER. You should be good to go.
   
 ### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes
