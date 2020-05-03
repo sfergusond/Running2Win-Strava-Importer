@@ -35,7 +35,8 @@ __Do not close the terminal window while the program runs or hit CTRL+C or Comma
 ### If the program quits unexpectedly or becomes stuck for more than a couple minutes:
 1) Close and re-open the terminal window
 2) Go to Strava and check the date of the most recent activity that was uploaded
-2) Then re-run the program by copy/pasting `python R2WImporter.py i` 
+3) Re-run the program by copy/pasting `python R2WImporter.py i` 
+4) Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
 
 # Features 
 
