@@ -31,13 +31,11 @@ Uses: webbot from https://github.com/nateshmbhat/webbot
 import os
 import sys
 
-def main():
-    if len(sys.argv) == 1:
-        print(sys.argv[0] + ' ARGV')
-        os.system('curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py')
-        os.system('python get-pip.py')
-        os.system('pip install -r requirements.txt')
-    
+def main():    
+    if os.name == 'nt':
+        os.system('python -m pip install -r requirements.txt')
+    else:
+        os.system('python3 -m pip install -r requirements.txt')
     args = {}
     
     print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\nEnter options exactly as they appear.')
