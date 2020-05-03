@@ -6,15 +6,15 @@ Automatically imports running2win activity data, including descriptions and comm
 ### 1) Download the code
 [Click here to download the zip folder with the program files](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
 
-### 2) Extract files into separate folder
-Double click on `Running2Win-Strava-Importer-master.zip` to extract all the files into their own folder. The folder should contain the following files:
+### 2) Extract files
+Double click on "Running2Win-Strava-Importer-master.zip" to extract all the files into their own folder (it'll be called "Running2Win-Strava-Importer-master"). The folder should contain the following files:
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
 ### 3) Install Python
 Click the link to the right to install Python (if you already have it, it must be at least Python3.7) ([Mac installer](https://www.python.org/ftp/python/3.8.3/python-3.8.3rc1-macosx10.9.pkg)). Then, run the installer. __While you're at this step, download Chrome on your computer if you haven't already, it is required for the program to work__
 
 ### 3) Run R2WImporter.py
-Right click on R2WImporter.py in folder from step 2. Choose "Open With..." > "Python Launcher". A bunch of stuff will download.
+Right click on R2WImporter.py in the folder from step 2. Choose "Open With..." > "Python Launcher". A bunch of stuff will download.
 
 _If this doesn't work, follow the Windows instructions below from step 4._
 
@@ -44,11 +44,11 @@ __Do not close the terminal window while the program runs or hit Command+C in th
 [Click here to download the zip folder with the program files](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
 
 ### 2) Extract files into separate folder
-Double click on `Running2Win-Strava-Importer-master.zip` to extract all the files from into their own folder. The folder should contain the following files:
+Double click on `Running2Win-Strava-Importer-master.zip` to extract all the files from into their own folder. Note the path shown at the top of the folder window. The folder should contain the following files:
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
 ### 3) Install Python
-Install Python (if you already have it, it must be at least Python3.7). ([Windows installer](https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe)) Then, run the installer. For Windows, check the "Add Python to PATH" box. __While you're at this step, download Chrome on your computer if you haven't already, it is required for the program to work__
+Install Python (if you already have it, it must be at least Python3.7). ([Windows installer](https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe)) Then, run the installer. Check the "Add Python to PATH" box. __While you're at this step, download Chrome on your computer if you haven't already, it is required for the program to work__
 
 ![install](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
 
