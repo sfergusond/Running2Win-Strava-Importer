@@ -28,17 +28,17 @@ def main():
     args['a'] = a
     b = str(input('Enter date of last activity to collect (format: YYYY-MM-DD): '))
     args['b'] = b
-    c = str(input('Would you like to download to a .csv file or upload to Strava? (Options: csv | upload ): '))
+    c = str(input('Would you like to download to a .csv file or upload to Strava? (Type one of the follow and enter: csv | upload ): '))
     args['c'] = c
     if c != 'csv':
-        m = str(input('How do you login to Strava? (Options: Google | Facebook | Email ): '))
+        m = str(input('How do you login to Strava? (Type one of the following and enter: google | facebook | email ): '))
         args['m'] = m 
-        if m == 'Google':
+        if m == 'google':
             su = str(input('Enter Google account email: '))
             args['su'] = su
             sp = str(input('Enter Google account password: '))
             args['sp'] = sp
-        elif m == 'Facebook':
+        elif m == 'facebook':
             su = str(input('Enter Facebook account email: '))
             args['su'] = su
             sp = str(input('Enter Facebook account password: '))
@@ -55,7 +55,7 @@ def main():
 
 def login_strava(username, password, web, method):
     web.go_to('https:///www.strava.com/login')
-    if method == "Google":
+    if method == "google":
         print('Logging into Strava with Google...')
         web.click('Log in using Google')
         web.type(username, into = 'Email or phone')
@@ -63,7 +63,7 @@ def login_strava(username, password, web, method):
         time.sleep(3)
         web.type(password, classname = 'Xb9hP')
         web.click('Next')
-    elif method == 'Facebook':
+    elif method == 'facebook':
         print('Logging into Strava with Facebook...')
         web.click('Log in using Facebook')
         web.type(username, id='email')
@@ -150,7 +150,7 @@ def add_strava_entry(run, web):
     # SUBMIT
     web.click(xpath='/html/body/div[1]/div[3]/div[1]/form/div[6]/div/input')
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, length = 50, fill = '█', printEnd = "\r"):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, length = 100, fill = '█', printEnd = "\r"):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """
@@ -158,7 +158,7 @@ def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, l
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
-    print('\r%s \n\n|%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
+    print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
     # Print New Line on Complete
     if iteration == total: 
         print()
@@ -200,7 +200,7 @@ def driver(args):
         gathered = r2w_parser.runs_to_dict(t, f)
         runs.extend(gathered)
         
-        progress = f'\rGathered {len(runs)} activities | Most Recent: ' + gathered[0]['date']
+        progress = f'Gathered {len(runs)} activities | Most Recent: ' + gathered[0]['date']
         printProgressBar(count, total_days, prefix=progress)
         
     if args['c'] == 'csv':
@@ -226,7 +226,7 @@ def driver(args):
         add_strava_entry(i, web)
         
         count += 1
-        progress = f'\rAdded activity on ' + i['date'] + f' to Strava | Total = {count} of {len(runs)}'
+        progress = f'Added activity on ' + i['date'] + f' to Strava | Total = {count} of {len(runs)}'
         printProgressBar(count, len(runs), prefix=progress)
         
     web.driver.close()
