@@ -38,6 +38,8 @@ If that didn't work, try using this command instead: `python -m pip install -r r
 
 7. You're ready to run the importer! Type or copy/paste `python R2WImporter.py` into the terminal and hit ENTER. The program will prompt you to enter your Running2Win login info, two dates, an upload (to Strava) or download (to a .csv file) option, your Strava login method (Google, Facebook, or direct Email/Password entry), and your Strava login info. Type the info into each prompt and hit ENTER on your keyboard.
 
+![runtime](https://github.com/sfergusond/imgdump/blob/master/last%20step.png?raw=true)
+
 8. Hit ENTER on your keyboard and let the program run. It will take a while (about 20 seconds per activity, you do the math). Avoid logging into your Strava account while the program runs. __Do not close the terminal window while the program runs or hit CTRL+C or Command+C in the terminal__, print statements will notify you of the program's progress.
 
 9. If for some reason the program is interrupted, go to Strava and check the date of the most recent activity that was uploaded. Then re-run the program. If the program seems to be stuck for more than a minute or two, or if the program quits unexpectedly, you probably entered invalid or misformatted information into the prompts. Close and re-open the terminal window and start again from step 7.
