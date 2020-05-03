@@ -52,7 +52,7 @@ __Do not close the terminal window while the program runs or hit CTRL+C or Comma
     - Average HR
     -  Max HR
     - Race Information
-    - Interval Information
+    - Interval Workout Information
     - Member Comments
 * If `csv` is entered in the upload/csv prompt, then all gathered activities will be downloaded to a CSV file in the same directory as the downloaded program.
 * If `upload` is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
