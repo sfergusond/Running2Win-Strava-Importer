@@ -36,11 +36,10 @@ __Do not close the terminal window while the program runs or hit Command+C in th
 
 ### If the program won't run:
 
-1) 
-2) Open a terminal in the folder containing "R2WImporter.py" (from step 2). [INSTRUCTIONS](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) [*or, watch this 2.5 minute video*](https://www.youtube.com/watch?v=Txt-cLLa_vo)
-3) Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` into the terminal where the `$ ` and blinking cursor is and hit ENTER. 
-4) Copy/paste `python get-pip.py` and hit ENTER. 
-5) Copy/paste `python3 -m pip install -r requirements.txt` and hit ENTER.
+1) Open a terminal in the folder containing "R2WImporter.py" (from step 2). [quick-read instructions (scroll down for Mac)](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) or [watch this 2.5 minute video*](https://www.youtube.com/watch?v=Txt-cLLa_vo)
+2) Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` into the terminal where the `$ ` and blinking cursor is and hit ENTER. 
+3) Copy/paste `python get-pip.py` and hit ENTER. 
+4) Copy/paste `python3 -m pip install -r requirements.txt` and hit ENTER.
 5) Copy/paste `python3 R2WImporter.py` and ENTER. You should be good to go.
   
 ### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes
