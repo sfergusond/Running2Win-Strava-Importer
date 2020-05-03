@@ -32,7 +32,10 @@ __Do not close the terminal window while the program runs or hit CTRL+C or Comma
 
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
-However, if for some reason the program is interrupted, go to Strava and check the date of the most recent activity that was uploaded. Then re-run the program. If the program seems to be stuck for more than a minute or two, or if the program quits unexpectedly, you probably entered invalid or misformatted information into the prompts. Close and re-open the terminal window and start again from step 5. 
+### If the program quits unexpectedly or becomes stuck for more than a couple minutes:
+1) Close and re-open the terminal window
+2) Go to Strava and check the date of the most recent activity that was uploaded
+2) Then re-run the program by copy/pasting `python R2WImporter.py i` 
 
 # Features 
 
