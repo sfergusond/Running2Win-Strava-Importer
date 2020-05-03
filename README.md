@@ -27,7 +27,7 @@ python get-pip.py
 ```
 
 After completing both, your terminal should resemble something like this:
-_(If you get some kind of error, then you didn't install Python3.7 correctly. Uninstall Python and try again from step 3)_
+  _(If you get some kind of error, then you didn't install Python3.7 correctly. Uninstall Python and try again from step 3)_
 ![step5](https://github.com/sfergusond/imgdump/blob/master/step5.png?raw=true)
 
 6. Next, copy ```pip install -r requirements.txt``` into the command line and hit ENTER on your keyboard. A bunch of stuff will download.
