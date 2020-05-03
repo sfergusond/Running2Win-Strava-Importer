@@ -64,7 +64,11 @@ Install Python (if you already have it, it must be at least Python3.7). ([Window
 ![install](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
 
 ### 4) Open a Command Terminal in the folder containing "R2WImporter.py"
-Open a command terminal within the folder you made in step 2 by SHIFT+Right-clicking on the folder and selecting "Open Powershell window here". You should see something similar to this:
+Open a command terminal within the folder you made in step 2 by SHIFT+Right-clicking on the folder and selecting "Open Powershell window here". 
+
+![powershell](https://github.com/sfergusond/imgdump/blob/master/powershell.png?raw=true)
+
+You should see something similar to this:
 
 ![step4](https://github.com/sfergusond/imgdump/blob/master/step%203.png?raw=true)
 
