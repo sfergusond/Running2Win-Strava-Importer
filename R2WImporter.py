@@ -252,30 +252,3 @@ def driver(args):
     
 if __name__ == '__main__':
     main()
-    
-    '''import argparse
-    
-    parser = argparse.ArgumentParser(description='Retrieve R2W data and upload to Strava -- PUT ALL ARGUMENTS IN DOUBLE QUOTES | ex: -ru \"myr2wusername\" ---')
-    parser.add_argument('-ru', type = str, metavar = 'r2w_username', help = 'Running2Win username', required=True)
-    parser.add_argument('-rp', type = str, metavar = 'r2w_password', help = 'Running2Win password', required=True)
-    parser.add_argument('-a', type = str, metavar = 'after_date', help = 'Date of first activity to import from Running2Win\nMUST BE IN FORMAT: YYYY-MM-DD', required=True)
-    parser.add_argument('-b', type = str, metavar = 'before_date', help = 'Date of last activity to import from Running2Win\nMUST BE IN FORMAT: YYYY-MM-DD', required=True)
-    parser.add_argument('-su', type = str, metavar = 'strava_login_username/email', help = 'Username/email for Strava/Google/Facebook account, depending on the value of the -m flag', required=False)
-    parser.add_argument('-sp', type = str, metavar = 'strava_password', help = 'Password for Strava/Google/Facebook account, depending on the value of the -m flag', required=False)
-    parser.add_argument('-m', type = str, default = "Google", metavar = 'strava_login_method', help = 'Method for logging into Strava, default is Google sign-in\nDefault: \"Google\" (if you do not include this argument, it will default to Google sign-in)\nOptions: \"Email\" login to Strava via direct email/password combination\n\"Facebook\" login to Strava using Facebook\n"Google" login to Strava using Google', required = False)
-    parser.add_argument('-c', type = str, default = "upload", metavar = 'upload/download_method', help = 'Default: \"upload\" (if you do not include this argument, activities will be uploaded to Strava)\nOptions: \"upload\" to upload all activity data to Strava\n\"csv\" to import data to a local csv file (no upload or Strava login)', required = False)
-    args = parser.parse_args()
-    
-    # fix any whitespace issues
-    for a in vars(args):
-        arg = getattr(args, a)
-        if arg == None: continue
-        if arg[0] == '\'' and arg[-1] == '\'':
-            arg = arg.replace('\'','')
-            setattr(args, a, arg)
-            
-    vals = {'ru': args.ru, 'rp': args.rp, 'a': args.a, 'b': args.b, 'c': args.c, 'm': args.m, 'su': args.su, 'sp': args.sp}
-            
-    # Run!        
-    driver(vals)'''
-    
