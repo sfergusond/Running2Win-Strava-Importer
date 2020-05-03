@@ -16,7 +16,7 @@ Click the link to the right to install Python (if you already have it, it must b
 ### 3) Run R2WImporter.py
 Right click on "R2WImporter.py" in the folder from step 2. Choose "Open With..." > "Python Launcher". A bunch of stuff will download.
 
-_If this doesn't work, follow the [Windows instructions below from step 4](https://github.com/sfergusond/Running2Win-Strava-Importer#4-open-a-command-terminal-in-the-folder-from-step-2)._
+_If this doesn't work, follow [these instructions](https://github.com/sfergusond/Running2Win-Strava-Importer/blob/master/README.md#if-the-program-wont-run)._
 
 ### 4) Enter login info and date filters
 After you see "Starting R2W Importer" appear, the program will prompt you to enter your Running2Win login info, two dates, an upload (to Strava) or download (to a .csv file) option, your Strava login method (Google, Facebook, or direct Email/Password entry), and your Strava login info. 
