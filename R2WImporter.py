@@ -5,6 +5,7 @@ Author: Spencer Ferguson-Dryden
 https://github.com/sfergusond
 
 TO DO: Implement description-only upload
+
 Features
     Gathers all activity data from Running2Win, including non-running activities such as Cross Training, NO RUN - OFF, and Other activity types. Activites will be gather beginning from the specified begin date to the specified end date.
     For each activity, the following information is retrieved:
@@ -24,16 +25,19 @@ Features
     If csv is entered in the upload/csv prompt, then all gathered activities will be downloaded to a CSV file in the same directory as the downloaded program.
     If upload is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
 
+
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
-
-from webbot import Browser
-import datetime
-import time
-from bs4 import BeautifulSoup
-import r2w_parser
+import os
+import sys
 
 def main():
+    if len(sys.argv) == 1:
+        print(sys.argv[0] + ' ARGV')
+        os.system('curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py')
+        os.system('python get-pip.py')
+        os.system('pip install -r requirements.txt')
+    
     args = {}
     
     print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\nEnter options exactly as they appear.')
@@ -70,6 +74,12 @@ def main():
     print('')
     # Run!
     driver(args)
+    
+from webbot import Browser
+import datetime
+import time
+from bs4 import BeautifulSoup
+import r2w_parser
 
 def login_strava(username, password, web, method):
     web.go_to('https:///www.strava.com/login')
@@ -107,7 +117,7 @@ def login_r2w(username, password, web):
     print('Successfully logged into Running2Win and beginning activity download...\n')
 
 def add_strava_entry(run, web):
-    # DISTANVT
+    # DISTANCE
     web.type(run['distance'], id='activity_distance')
     
     # TIME
@@ -133,8 +143,6 @@ def add_strava_entry(run, web):
             web.scrolly(5*scroll)
         web.click(_type)
     else:
-        #web.scrolly(5)
-        #web.scrolly(100)
         web.click('Workout')
         
     # DATE
@@ -251,4 +259,4 @@ def driver(args):
     print(f'\nSuccessfully added {count} activities to Strava!')
     
 if __name__ == '__main__':
-    main()
+    main()    
