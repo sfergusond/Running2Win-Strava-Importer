@@ -29,7 +29,7 @@ Type the info into each prompt and hit ENTER on your keyboard. Let the program r
 __Do not close the terminal window while the program runs or hit CTRL+C or Command+C in the terminal__, print statements will notify you of the program's progress.
 
 
-![runtime](https://github.com/sfergusond/imgdump/blob/master/last%20step.png?raw=true)
+![runtime](https://github.com/sfergusond/imgdump/blob/master/prompts.png?raw=true)
 # 7
 If for some reason the program is interrupted, go to Strava and check the date of the most recent activity that was uploaded. Then re-run the program. If the program seems to be stuck for more than a minute or two, or if the program quits unexpectedly, you probably entered invalid or misformatted information into the prompts. Close and re-open the terminal window and start again from step 7.
 
