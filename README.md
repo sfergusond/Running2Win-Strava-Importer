@@ -5,7 +5,7 @@ Automatically imports running2win activity data, including descriptions and comm
 
 1. [Click here to download the a zip folder with the program files](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
 
-2. Unzip all the files in the zip folder you just downloaded into its own folder on your computer. The folder with the unzipped files should look like this, note the folder path at the top:
+2. Extract all the files from `Running2Win-Strava-Importer-master.zip` into their own folder. The folder should look like this, note the folder path at the top:
 
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
@@ -13,7 +13,7 @@ Automatically imports running2win activity data, including descriptions and comm
 
 ![install](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
 
-4. Open a command terminal within the folder you unzipped the downloaded files. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
+4. Open a command terminal within the folder made in step 2. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
 
 ![step4](https://github.com/sfergusond/imgdump/blob/master/step%203.png?raw=true)
 
