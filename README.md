@@ -3,17 +3,17 @@ Automatically imports running2win activity data, including descriptions and comm
 
 # Instructions
 
-1. [Click here to download the program](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
+1. [Click here to download the a zip folder with the program files](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
 
-2. Unzip the downloaded zip file into its own folder on your computer. The folder with the unzipped files should look like this, note the folder path at the top:
+2. Unzip all the files in the zip folder you just downloaded into its own folder on your computer. The folder with the unzipped files should look like this, note the folder path at the top:
 
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
-3. Make sure you have Python3.7 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the __installer executable__, then run the installer once it finishes downloading. Don't try to download the Python3.7 file directly*) Check the "Add Python3.7 to PATH" box if it exists. __While you're at this step, donwload Chrome on your computer if you haven't already, it is required for the program to work__
+3. Make sure you have Python downloaded and installed ([Windows](https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe) [Mac](https://www.python.org/ftp/python/3.8.3/python-3.8.3rc1-macosx10.9.pkg) Then, run the installer. Check the "Add Python to PATH" box if it exists. __While you're at this step, donwload Chrome on your computer if you haven't already, it is required for the program to work__
 
 ![install](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
 
-4. Open a command terminal within the folder you unzipped the repository files. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
+4. Open a command terminal within the folder you unzipped the downloaded files. [Click here for intructions for Windows and Mac](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
 
 ![step4](https://github.com/sfergusond/imgdump/blob/master/step%203.png?raw=true)
 
