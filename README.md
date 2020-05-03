@@ -14,7 +14,7 @@ Double click on "Running2Win-Strava-Importer-master.zip" to extract all the file
 Click the link to the right to install Python (if you already have it, it must be at least Python3.7) ([Mac installer](https://www.python.org/ftp/python/3.8.3/python-3.8.3rc1-macosx10.9.pkg)). Then, run the installer. __While you're at this step, download Chrome on your computer if you haven't already, it is required for the program to work.__
 
 ### 3) Run R2WImporter.py
-Right click on R2WImporter.py in the folder from step 2. Choose "Open With..." > "Python Launcher". A bunch of stuff will download.
+Right click on "R2WImporter.py" in the folder from step 2. Choose "Open With..." > "Python Launcher". A bunch of stuff will download.
 
 _If this doesn't work, follow the [Windows instructions below from step 4](https://github.com/sfergusond/Running2Win-Strava-Importer#4-open-a-command-terminal-in-the-folder-from-step-2)._
 
@@ -31,7 +31,13 @@ __Do not close the terminal window while the program runs or hit Command+C in th
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
 ### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes:
-1) If the program won't run, [watch this 2.5 minute video](https://www.youtube.com/watch?v=Txt-cLLa_vo). [Open a terminal in the folder from step 2](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/), copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` and hit ENTER. Then type `python get-pip.py` and hit ENTER. Then type `python3 R2WImporter.py` and ENTER. You should be good to go.
+1) If the program won't run:
+  - [watch this 2.5 minute video](https://www.youtube.com/watch?v=Txt-cLLa_vo). 
+  - [Open a terminal in the folder from step 2](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) 
+  - copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` and hit ENTER. 
+  - Then type `python get-pip.py` and hit ENTER. 
+  - Then type `python3 R2WImporter.py` and ENTER. You should be good to go.
+  
 2) If the program quits before all your runs are uploaded, or becomes stuck:
   - Close and re-open the terminal window and/or Python Launcher
   - Go to Strava and check the date of the most recent activity that was uploaded
