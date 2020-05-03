@@ -77,6 +77,10 @@ You're ready to import your Running2Win data! Type or copy/paste `python R2WImpo
 
 ![runtime](https://github.com/sfergusond/imgdump/blob/master/run.png?raw=true)
 
+**If the program doesn't run:**
+
+Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` into the terminal and hit ENTER. Then type `python get-pip.py` and hit ENTER. Then type `python R2WImporter.py` and ENTER. You should be good to go.
+
 ### 6) Enter login info and date filters
 After you see `Starting R2W Importer`, the program will prompt you to enter your Running2Win login info, two dates, an upload (to Strava) or download (to a .csv file) option, your Strava login method (Google, Facebook, or direct Email/Password entry), and your Strava login info. 
 
@@ -89,14 +93,11 @@ __Do not close the terminal window while the program runs or hit CTRL+C in the t
 
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
-If the program quits before all your runs are uploaded, or becomes stuck:
+### If the program quits before all your runs are uploaded, or becomes stuck:
 1) Close and re-open the terminal window
 2) Go to Strava and check the date of the most recent activity that was uploaded
 3) Re-run the program with Python Launcher
 4) Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
-
-### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes:
-1) If the program won't run, copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` into a terminal and hit ENTER. Then type `python get-pip.py` and hit ENTER. Then type `python R2WImporter.py` and ENTER. You should be good to go.
 
 # Features 
 
