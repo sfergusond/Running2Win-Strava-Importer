@@ -9,7 +9,7 @@ Automatically imports running2win activity data, including descriptions and comm
 
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
-3. Make sure you have Python3.7 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the __installer executable__, then run the installer once it finishes downloading. Don't try to download the Python3.7 file directly*) Check the "Add Python3.7 to PATH" box if it exists.) __While you're at this step, donwload Chrome on your computer if you haven't already, it is required for the program to work__
+3. Make sure you have Python3.7 downloaded and installed: see https://www.python.org/downloads/ (*make sure you download the __installer executable__, then run the installer once it finishes downloading. Don't try to download the Python3.7 file directly*) Check the "Add Python3.7 to PATH" box if it exists. __While you're at this step, donwload Chrome on your computer if you haven't already, it is required for the program to work__
 
 ![install](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
 
