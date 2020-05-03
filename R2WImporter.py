@@ -29,44 +29,45 @@ Features
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
 import os
-import sys
 
 def main():    
     if os.name == 'nt':
+        print('Running on Windows')
         os.system('python -m pip install -r requirements.txt')
     else:
+        print('Running on Mac')
         os.system('python3 -m pip install -r requirements.txt')
     args = {}
     
-    print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\nEnter options exactly as they appear.')
+    print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\n')
     
-    ru = str(input('Enter your Running2Win username: '))
+    ru = str(input('Enter your Running2Win username\n> '))
     args['ru'] = ru
-    rp = str(input('Enter your Running2Win password: '))
+    rp = str(input('Enter your Running2Win password\n> '))
     args['rp'] = rp
-    a = str(input('Enter date of first activity to collect (format: YYYY-MM-DD): '))
+    a = str(input('\nEnter date of first activity to collect (format: YYYY-MM-DD)\n> '))
     args['a'] = a
-    b = str(input('Enter date of last activity to collect (format: YYYY-MM-DD): '))
+    b = str(input('Enter date of last activity to collect (format: YYYY-MM-DD)\n> '))
     args['b'] = b
-    c = str(input('Would you like to download to a .csv file or upload to Strava? (Type one of the follow and enter: csv | upload ): '))
+    c = str.lower(str((input('\nDownload to a .csv file or upload to Strava? \nType one of the following and enter: csv | upload | both\n> '))))
     args['c'] = c
-    if c != 'csv':
-        m = str(input('How do you login to Strava? (Type one of the following and enter: google | facebook | email ): '))
+    if 'csv' not in c:
+        m = str.lower(str((input('\nHow do you login to Strava? \nType one of the following and enter: google | facebook | email\n> '))))
         args['m'] = m 
-        if m == 'google':
-            su = str(input('Enter Google account email: '))
+        if 'google' in m:
+            su = str(input('\nEnter Google account email\n> '))
             args['su'] = su
-            sp = str(input('Enter Google account password: '))
+            sp = str(input('Enter Google account password\n> '))
             args['sp'] = sp
-        elif m == 'facebook':
-            su = str(input('Enter Facebook account email: '))
+        elif 'facebook' in m:
+            su = str(input('\nEnter Facebook account email\n> '))
             args['su'] = su
-            sp = str(input('Enter Facebook account password: '))
+            sp = str(input('Enter Facebook account password\n> '))
             args['sp'] = sp
         else:
-            su = str(input('Enter Strava account email: '))
+            su = str(input('\nEnter Strava account email\n> '))
             args['su'] = su
-            sp = str(input('Enter Strava account password: '))
+            sp = str(input('Enter Strava account password\n> '))
             args['sp'] = sp
             
     print('')
@@ -81,7 +82,7 @@ import r2w_parser
 
 def login_strava(username, password, web, method):
     web.go_to('https:///www.strava.com/login')
-    if method == "google":
+    if "google" in method:
         print('Logging into Strava with Google...')
         web.click('Log in using Google')
         web.type(username, into = 'Email or phone')
@@ -89,7 +90,7 @@ def login_strava(username, password, web, method):
         time.sleep(3)
         web.type(password, classname = 'Xb9hP')
         web.click('Next')
-    elif method == 'facebook':
+    elif 'facebook' in method:
         print('Logging into Strava with Facebook...')
         web.click('Log in using Facebook')
         web.type(username, id='email')
@@ -174,7 +175,7 @@ def add_strava_entry(run, web):
     # SUBMIT
     web.click(xpath='/html/body/div[1]/div[3]/div[1]/form/div[6]/div/input')
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, length = 100, fill = '█', printEnd = "\r"):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, length = 50, fill = '*', printEnd = "\r"):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """
@@ -187,13 +188,26 @@ def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, l
     if iteration == total: 
         print()
 
+def to_csv(runs):
+    import pandas as pd
+    for a in runs:
+        tmp = a['time']
+        if tmp[0] == 0:
+            time = f'{tmp[1]}:{tmp[2]}'
+        else:
+            time = f'{tmp[0]}:{tmp[1]}:{tmp[2]}'
+        a['time'] = time
+    
+    pd.DataFrame(runs).to_csv('activities.csv', index=False)
+    print('\nActivities downloaded to \"activities.csv\" in the program\'s folder')
+
 def driver(args):
-    import sys
     web = Browser(showWindow=False)
     
     print('Loading https://www.running2win.com ...')
     login_r2w(args['ru'], args['rp'], web)
     
+    # Init iterator and date filters
     tmp = (args['a']).split('-')
     start = datetime.date(int(tmp[0]), int(tmp[1]), int(tmp[2]))
     tmp = (args['b']).split('-')
@@ -207,7 +221,7 @@ def driver(args):
     
     runs = [] # Master list for activities
     
-    # Navigate to running log and iterate through 8 week chunks
+    # Navigate to R2W running log and iterate through 8 week chunks
     count = 0
     while start < end:
         count += 56
@@ -224,34 +238,28 @@ def driver(args):
         gathered = r2w_parser.runs_to_dict(t, f)
         runs.extend(gathered)
         
-        progress = f'Gathered {len(runs)} activities | Most Recent: ' + gathered[0]['date']
-        printProgressBar(count, total_days, prefix=progress)
+        progress = f'(Gathered {len(runs)} activities | Most Recent: ' + gathered[0]['date'] + ')'
+        printProgressBar(count, total_days, suffix=progress)
         
-    if args['c'] == 'csv':
-        import pandas as pd
-        for a in runs:
-            tmp = a['time']
-            if tmp[0] == 0:
-                time = f'{tmp[1]}:{tmp[2]}'
-            else:
-                time = f'{tmp[0]}:{tmp[1]}:{tmp[2]}'
-            a['time'] = time
-    
-        pd.DataFrame(runs).to_csv('activities.csv', index=False)
-        print('\nActivities downloaded to \"activities.csv\" in the program\'s folder')
+    # CSV download
+    if 'csv' in args['c']:
+        to_csv(runs)
         web.driver.close()
+    elif 'both' in args['c']:
+        to_csv(runs)
     
     print("\nLoading https://www.strava.com ...")
     login_strava(args['su'], args['sp'], web, args['m'])
     
+    # Strava upload
     count = 0
     for i in runs:
         web.go_to('https://www.strava.com/upload/manual')
         add_strava_entry(i, web)
         
         count += 1
-        progress = f'Added activity on ' + i['date'] + f' to Strava | Total = {count} of {len(runs)}'
-        printProgressBar(count, len(runs), prefix=progress)
+        progress = f'(Added activity on ' + i['date'] + f' to Strava | Total = {count} of {len(runs)})'
+        printProgressBar(count, len(runs), suffix=progress)
         
     web.driver.close()
     print(f'\nSuccessfully added {count} activities to Strava!')
