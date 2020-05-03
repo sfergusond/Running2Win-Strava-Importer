@@ -44,6 +44,8 @@ If that didn't work, try using this command instead: `python -m pip install -r r
 
 9. If for some reason the program is interrupted, go to Strava and check the date of the most recent activity that was uploaded. Then re-run the program. If the program seems to be stuck for more than a minute or two, or if the program quits unexpectedly, you probably entered invalid or misformatted information into the prompts. Close and re-open the terminal window and start again from step 7.
 
+Successful output is shown below. Some error statements may print, but if the program keeps running just ignore them.
+
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
 Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. __It does not work with Apple logins__.
@@ -71,59 +73,3 @@ __Note: Usernames and passwords are not stored by the program__
 * If `upload` is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
 
 In progress: matching activity descriptions/race info/interval info downloaded from Running2Win with existing activities on Strava
-   
-# Advanced Usage
-
-```
-usage: R2WImporter.py \[-h] -ru r2w_username -rp r2w_password -a after_date -b
-                 before_date [-su strava_email] [-sp strava_password] 
-                 [-m strava_login_method] [-c upload/download type]
-
-Retrieve R2W data and upload to Strava --- PUT ALL ARGUMENTS IN DOUBLE QUOTES | ex: -ru "myr2wusername" ---
-
-required arguments:
-  -ru r2w_username      Running2Win username
-  -rp r2w_password      Running2Win password
-  -a after_date         Date of first activity to import from Running2Win 
-                        MUST BE IN FORMAT: YYYY-MM-DD
-  -b before_date        Date of last activity to import from Running2Win
-                        MUST BE IN FORMAT: YYYY-MM-DD
-
-optional arguments:
-  -h, --help            show this help message and exit
-  -su strava_email      Username/email for Strava/Google/Facebook account, 
-                        depending on the value of the -m flag (see below)
-  -sp strava_password   Password for Strava/Google/Facebook account, 
-                        depending on the value of the -m flag (see below)
-  -m Strava_login_method
-                        Method for logging into Strava, default is Google sign-in
-                        Default: "Google" (if you do not include this argument, 
-                        it will default to Google sign-in)
-                        Options: "Email" login to Strava via direct email/password combination
-                                 "Facebook" login to Strava using Facebook
-                                 "Google" login to Strava using Google
-  -c upload/download type 
-                        Default: "upload" (if you do not include this argument, activities will be uploaded to Strava)
-                        Options: "upload" to upload all activity data to Strava 
-                                 "csv" to import data to a local csv file (no upload)
-```
-
-# Examples
-
-```
-python R2WBot.py -ru "r2w_username" -rp "r2w_password" -a "2016-05-31" -b "2020-04-01" -su "strava_username1" -sp "strava_password"
-```
-
-This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). The program will attempt to sign-in to Strava via Google. The activities will then be uploaded automatically to Strava. 
-
-```
-python R2WBot.py -ru "r2w_username" -rp "r2w_password" -a "2016-05-31" -b "2020-04-01" -su "strava_username1" -sp "strava_password" -m "Email"
-```
-
-This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). Rather than attempting a Google sign-in, the bot will directly enter the given Strava user's email and password into the fields on www.strava.com/login. The activities will then be uploaded to Strava.
-
-```
-python R2WBot.py -ru "r2w_username" -rp "r2w_password" -a "2016-05-31" -b "2020-04-01" -c "csv"
-```
-
-This will download every activity, including descriptions and comments, from Running2Win.com between May 31st, 2016 and April 1st, 2020 (both inclusive). The activities will be downloaded to a file named "activities.csv" in the same directory as the code. The program will not attempt to login or upload to Strava.
