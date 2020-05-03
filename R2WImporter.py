@@ -5,6 +5,24 @@ Author: Spencer Ferguson-Dryden
 https://github.com/sfergusond
 
 TO DO: Implement description-only upload
+Features
+    Gathers all activity data from Running2Win, including non-running activities such as Cross Training, NO RUN - OFF, and Other activity types. Activites will be gather beginning from the specified begin date to the specified end date.
+    For each activity, the following information is retrieved:
+        Date
+        Distance
+        Time
+        Activity Type
+        Activity Title
+        And, if they exist:
+            Description (private notes not included)
+            Difficulty
+            Average HR
+            Max HR
+            Race Information
+            Interval Information
+            Member Comments
+    If csv is entered in the upload/csv prompt, then all gathered activities will be downloaded to a CSV file in the same directory as the downloaded program.
+    If upload is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
 
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
