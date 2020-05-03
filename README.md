@@ -20,7 +20,13 @@ Click the link to the right to install Python (if you already have it, it must b
 ### 3) Run R2WImporter.py
 Right click on "R2WImporter.py" in the folder from step 2. Choose "Open With..." > "Python Launcher". A bunch of stuff will download.
 
-_If this doesn't work, follow [these instructions](https://github.com/sfergusond/Running2Win-Strava-Importer/blob/master/README.md#if-the-program-wont-run)._
+**If this doesn't work, do the following instead:**
+
+1) _Open a terminal in the folder containing "R2WImporter.py" (from step 2). [Quick-read instructions (scroll down for Mac)](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) or [watch this 2.5 minute video](https://www.youtube.com/watch?v=Txt-cLLa_vo)._
+2) _Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` into the terminal where the `$ ` and blinking cursor is and hit ENTER._
+3) _Copy/paste `python get-pip.py` and hit ENTER._
+4) _Copy/paste `python3 -m pip install -r requirements.txt` and hit ENTER._
+5) _Copy/paste `python3 R2WImporter.py` and ENTER. You should be good to go._
 
 ### 4) Enter login info and date filters
 After you see "Starting R2W Importer" appear, the program will prompt you to enter your Running2Win login info, two dates, an upload (to Strava) or download (to a .csv file) option, your Strava login method (Google, Facebook, or direct Email/Password entry), and your Strava login info. 
@@ -33,14 +39,6 @@ Type the info into each prompt and hit ENTER on your keyboard. Let the program r
 __Do not close the terminal window while the program runs or hit Command+C in the terminal__, print statements will notify you of the program's progress. Some error statements may print, but if the program keeps running just ignore them.
 
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
-
-### If the program won't run:
-
-1) Open a terminal in the folder containing "R2WImporter.py" (from step 2). [Quick-read instructions (scroll down for Mac)](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) or [watch this 2.5 minute video](https://www.youtube.com/watch?v=Txt-cLLa_vo).
-2) Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` into the terminal where the `$ ` and blinking cursor is and hit ENTER. 
-3) Copy/paste `python get-pip.py` and hit ENTER. 
-4) Copy/paste `python3 -m pip install -r requirements.txt` and hit ENTER.
-5) Copy/paste `python3 R2WImporter.py` and ENTER. You should be good to go.
   
 ### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes
 
