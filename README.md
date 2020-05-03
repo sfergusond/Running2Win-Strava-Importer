@@ -4,7 +4,7 @@ Automatically imports running2win activity data, including descriptions and comm
 ### Instructions ###
 
 # 1
-[Click here to download the a zip folder with the program files](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
+[Click here to download the zip folder with the program files](https://github.com/sfergusond/Running2Win-Strava-Importer/archive/master.zip)
 # 2
 Extract all the files from `Running2Win-Strava-Importer-master.zip` into their own folder. The folder should look like this, note the folder path at the top:
 
