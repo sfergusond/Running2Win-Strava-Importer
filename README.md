@@ -30,19 +30,20 @@ __Do not close the terminal window while the program runs or hit Command+C in th
 
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
-### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes:
-1) If the program won't run:
-  - [watch this 2.5 minute video](https://www.youtube.com/watch?v=Txt-cLLa_vo). 
-  - [Open a terminal in the folder from step 2](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) 
-  - copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` and hit ENTER. 
-  - Then type `python get-pip.py` and hit ENTER. 
-  - Then type `python3 R2WImporter.py` and ENTER. You should be good to go.
+### If the program won't run:
+
+1) [watch this 2.5 minute video](https://www.youtube.com/watch?v=Txt-cLLa_vo). 
+2) [Open a terminal in the folder containing "R2WImporter.py" (from step 2)](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) 
+3) Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` and hit ENTER. 
+4) Copy/paste `python get-pip.py` and hit ENTER. 
+5) Copy/paste `python3 R2WImporter.py` and ENTER. You should be good to go.
   
-2) If the program quits before all your runs are uploaded, or becomes stuck:
-  - Close and re-open the terminal window and/or Python Launcher
-  - Go to Strava and check the date of the most recent activity that was uploaded
-  - Re-run the program with Python Launcher
-  - Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
+### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes
+
+1) Close and re-open the terminal window and/or Python Launcher
+2) Go to Strava and check the date of the most recent activity that was uploaded
+3) Re-run the program with Python Launcher
+4) Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
 
 # Instructions for Windows
 
