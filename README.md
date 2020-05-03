@@ -26,20 +26,13 @@ After you see `Starting R2W Importer`, the program will prompt you to enter your
 
 Type the info into each prompt and hit ENTER on your keyboard. Let the program run. It will take a while (about 20 seconds per activity, you do the math). Avoid logging into your Strava account while the program runs. 
 
-__Do not close the terminal window while the program runs or hit CTRL+C or Command+C in the terminal__, print statements will notify you of the program's progress.
-
-
 ![runtime](https://github.com/sfergusond/imgdump/blob/master/prompts.png?raw=true)
 # 7
-If for some reason the program is interrupted, go to Strava and check the date of the most recent activity that was uploaded. Then re-run the program. If the program seems to be stuck for more than a minute or two, or if the program quits unexpectedly, you probably entered invalid or misformatted information into the prompts. Close and re-open the terminal window and start again from step 7.
-
-Successful output is shown below. Some error statements may print, but if the program keeps running just ignore them.
+__Do not close the terminal window while the program runs or hit CTRL+C or Command+C in the terminal__, print statements will notify you of the program's progress. Some error statements may print, but if the program keeps running just ignore them.
 
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
-Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. __It does not work with Apple logins__.
-
-__Note: Usernames and passwords are not stored by the program__
+However, if for some reason the program is interrupted, go to Strava and check the date of the most recent activity that was uploaded. Then re-run the program. If the program seems to be stuck for more than a minute or two, or if the program quits unexpectedly, you probably entered invalid or misformatted information into the prompts. Close and re-open the terminal window and start again from step 5. 
 
 ## Features ##
 
@@ -60,5 +53,9 @@ __Note: Usernames and passwords are not stored by the program__
     - Member Comments
 * If `csv` is entered in the upload/csv prompt, then all gathered activities will be downloaded to a CSV file in the same directory as the downloaded program.
 * If `upload` is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
+
+Note: Currently the program can only support logging into Strava via a Google account, Facebook account, or email/password combination. __It does not work with Apple logins__.
+
+__Note: Usernames and passwords are not stored by the program__
 
 In progress: matching activity descriptions/race info/interval info downloaded from Running2Win with existing activities on Strava
