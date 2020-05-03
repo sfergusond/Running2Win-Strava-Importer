@@ -44,10 +44,11 @@ __Do not close the terminal window while the program runs or hit Command+C in th
   
 ### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes
 
+You probably have typos in your username/password information:
 1) Close and re-open the terminal window and/or Python Launcher
 2) Go to Strava and check the date of the most recent activity that was uploaded
 3) Re-run the program with Python Launcher
-4) Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
+4) Make sure you type prompt options exactly as they appear (ex. `2019-11-02` is valid, `2019-11-2` is not).
 
 # Instructions for Windows
 
@@ -94,10 +95,12 @@ __Do not close the terminal window while the program runs or hit CTRL+C in the t
 ![sucess](https://github.com/sfergusond/imgdump/blob/master/success.png?raw=true)
 
 ### If the program quits before all your runs are uploaded, or becomes stuck:
+
+You probably have typos in your login information:
 1) Close and re-open the terminal window
 2) Go to Strava and check the date of the most recent activity that was uploaded
 3) Re-run the program with Python Launcher
-4) Make sure you type prompt options exactly as they appear (ex. `google` is valid, `Google` is not, `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
+4) Make sure you type prompt options exactly as they appear (ex. `2019-11-02` is valid, `2019-11-2` is not). Make sure your login info is also correct.
 
 # Features 
 
