@@ -9,7 +9,7 @@ Automatically imports running2win activity data, including descriptions and comm
 
 ![step1](https://github.com/sfergusond/imgdump/blob/master/step1.png?raw=true)
 
-3. Make sure you have Python downloaded and installed ([Windows installer](https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe) | [Mac installer](https://www.python.org/ftp/python/3.8.3/python-3.8.3rc1-macosx10.9.pkg)). Then, run the installer. Check the "Add Python to PATH" box if it exists. __While you're at this step, donwload Chrome on your computer if you haven't already, it is required for the program to work__
+3. Make sure you have Python downloaded and installed ([Windows installer](https://www.python.org/ftp/python/3.8.2/python-3.8.2.exe) | [Mac installer](https://www.python.org/ftp/python/3.8.3/python-3.8.3rc1-macosx10.9.pkg)). Then, run the installer. Check the "Add Python to PATH" box if it exists. __While you're at this step, download Chrome on your computer if you haven't already, it is required for the program to work__
 
 ![install](https://github.com/sfergusond/imgdump/blob/master/install.png?raw=true)
 
