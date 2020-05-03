@@ -36,6 +36,7 @@ __Do not close the terminal window while the program runs or hit Command+C in th
 2) [Open a terminal in the folder containing "R2WImporter.py" (from step 2)](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/) 
 3) Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` and hit ENTER. 
 4) Copy/paste `python get-pip.py` and hit ENTER. 
+5) Copy/paste `python3 -m pip install -r requirements.txt`
 5) Copy/paste `python3 R2WImporter.py` and ENTER. You should be good to go.
   
 ### If errors occur, the program quits unexpectedly, or becomes stuck for more than a couple minutes
@@ -86,6 +87,10 @@ If the program quits before all your runs are uploaded, or becomes stuck:
 Open a command terminal within the folder you made in step 2 by SHIFT+Right-clicking on the folder and selecting "Open Powershell window here". [Click here for Mac instructions](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You should see something similar to this:
 
 ![step4](https://github.com/sfergusond/imgdump/blob/master/step%203.png?raw=true)
+
+### 2) A few commands:
+
+Copy/paste `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` into the line denoted by `> ` (for Windows) or `$ ` (for Mac) and hit ENTER. Then, copy/paste `python get-pip.py` and hit ENTER. Finally, copy/paste `pip install -r requirements.txt` and hit ENTER.
 
 ### 2) Run the program
 You're ready to import your Running2Win data! Type or copy/paste `python R2WImporter.py` (Mac: `python3 R2WImporter.py`) where the blinking cursor is in the terminal you just opened and hit ENTER (__if CTRL+V does something weird, right-click to paste instead__). A bunch of stuff will begin to download.
