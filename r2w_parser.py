@@ -53,17 +53,15 @@ def runs_to_dict(html, soup):
         _type = r[:r.find(' |')] 
         title += ' ' + _type
             
-        # distance
+        # distance/time
         r = r[r.find('distance |') + 11:]
         distance = r[:r.find(' |'):]
-        if '-' in distance: distance = '0.01';
-        else: distance = str(parse_distance(distance));
-            
-        # time
         if ':' in distance:
-            r = r[r.find('in'):]
-            time = r[3:r.find(' [')]
-        else: time = '0'
+            r = r[r.find('in'):] # time
+            time = r[3:r.find(' [')] # time
+        else: time = '0' # time
+        if '-' in distance: distance = '0.01'; # distance
+        else: distance = str(parse_distance(distance)); # distance
             
         # description
         r = r[r.find('| Comments |') + 13:]
