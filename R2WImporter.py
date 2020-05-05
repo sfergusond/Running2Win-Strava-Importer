@@ -313,6 +313,7 @@ def driver(args):
     # Strava upload
     count = 0
     for i in runs:
+        time.sleep(1)
         add_strava_entry(i, web)
         curr_date = i['date']
         
