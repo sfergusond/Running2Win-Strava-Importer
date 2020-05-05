@@ -377,7 +377,7 @@ def r2w_download(start, end, web):
     return li
 
 def driver(args):       
-    web = Browser(showWindow=True)
+    web = Browser(showWindow=False)
     login_r2w(web)
     
     # Master list of R2W activities
