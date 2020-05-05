@@ -1,5 +1,4 @@
 stravalib
-webbot
 bs4
 selenium
 lxml
