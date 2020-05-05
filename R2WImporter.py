@@ -186,29 +186,37 @@ def login_strava(web):
         web.type(pw, id='password_text_field')
         
         web.click(id='sign-in')
-
+        
     time.sleep(5)
-    if 'strava.com' in web.get_current_url()[0:24]:
+    if 'strava.com' in web.get_current_url()[0:24]: # ATTEMPT 1
         print('Successfully logged into Strava and beginning activity upload...\n')
         return web
     else:
         print(input('\nCHECK YOUR PHONE FOR POTENTIAL TWO-FACTOR VERIFICATION PROMPT\n\nPress verification prompt on your phone or enter validation code here and press ENTER to continue\n> '))
-        time.sleep(5)
-        if len(web.find_elements(classname = 'PrDSKc')) > 0:
-            web.click(classname='PrDSKc')
-        time.sleep(5)
+        time.sleep(7)
         if 'strava.com' in web.get_current_url()[0:24]:
             print('Successfully logged into Strava and beginning activity upload...\n')
             web.switch_to_tab(number = 1)
             return web
-        else:
-            web.driver.close()
-            tmp = Browser(showWindow = True)
-            tmp.go_to('https://www.strava.com/login')
-            print(input('Issue logging in. Please login manually and press ENTER when done'))
+        else: # ATTEMPT 2
+            web.scrolly(200)
+            web.click('verification')
+            time.sleep(7)
+            web.type(str(input('\nCHECK YOUR PHONE FOR POTENTIAL TWO-FACTOR VERIFICATION PROMPT\n\nPress verification prompt on your phone or enter validation code here and press ENTER to continue\n> ')), into='Enter the code')
+            web.press(web.Key.ENTER)
             time.sleep(5)
-            tmp.driver.set_window_position(-10000, 0)
-            return tmp
+            if 'strava.com' not in web.get_current_url()[0:24]: # MANUAL ATTEMPT
+                web.driver.close()
+                tmp = Browser(showWindow = True)
+                tmp.go_to('https://www.strava.com/login')
+                print(input('Issue logging in. Please login manually and press ENTER when done'))
+                time.sleep(5)
+                tmp.driver.set_window_position(-10000, 0)
+                return tmp
+            else:
+                print('Successfully logged into Strava and beginning activity upload...\n')
+                web.switch_to_tab(number = 1)
+                return web
 
 def login_r2w(web):
     print('Loading Running2Win...\n')
@@ -291,7 +299,7 @@ def add_strava_entry(run, web):
     # SUBMIT
     web.click(xpath='/html/body/div[1]/div[3]/div[1]/form/div[6]/div/input')
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 25, fill = '*', printEnd = '\r', t1 = None, t2 = None, step = 1):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 25, fill = '█', printEnd = '\r', t1 = None, t2 = None, step = 1):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """    
@@ -369,7 +377,7 @@ def r2w_download(start, end, web):
     return li
 
 def driver(args):       
-    web = Browser(showWindow=False)
+    web = Browser(showWindow=True)
     login_r2w(web)
     
     # Master list of R2W activities

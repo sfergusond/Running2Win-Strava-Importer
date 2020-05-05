@@ -173,7 +173,7 @@ def read_csv(a, b): # only needed locally
             
     return li
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 25, fill = '*', printEnd = '\r', t1 = None, t2 = None, step = 1):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 25, fill = '█', printEnd = '\r', t1 = None, t2 = None, step = 1):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """
@@ -190,7 +190,7 @@ def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, l
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + ' ' * (length - filledLength)
-    print(f'\r{prefix} |{bar}| {percent}% ({est_time} remaining)', end = printEnd)
+    print(f'\r{prefix} |{bar}| {percent}% ({est_time}', end = printEnd)
     #print('\r%s|%s| %s%% %s%s' % (prefix, bar, percent, suffix, est_time), end = printEnd, flush = True)
     # Print New Line on Complete
     if iteration == total: 
