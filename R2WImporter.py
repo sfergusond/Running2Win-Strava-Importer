@@ -25,99 +25,151 @@ Features
     If csv is entered in the upload/csv prompt, then all gathered activities will be downloaded to a CSV file in the same directory as the downloaded program.
     If upload is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
 
+TO DO: Stalling gathering lots of r2w data??
 
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
-import os
-
-def main():    
-    if os.name == 'nt':
-        print('Running on Windows')
-        os.system('python -m pip install -r requirements.txt')
-    else:
-        print('Running on Mac')
-        os.system('python3 -m pip install -r requirements.txt')
-    args = {}
-    
-    print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\n')
-    
-    ru = str(input('Enter your Running2Win username\n> '))
-    args['ru'] = ru
-    rp = str(input('Enter your Running2Win password\n> '))
-    args['rp'] = rp
-    a = str(input('\nEnter date of first activity to collect (format: YYYY-MM-DD)\n> '))
-    args['a'] = a
-    b = str(input('Enter date of last activity to collect (format: YYYY-MM-DD)\n> '))
-    args['b'] = b
-    c = str.lower(str((input('\nDownload to a .csv file or upload to Strava? \nType one of the following and enter: csv | upload | both\n> '))))
-    args['c'] = c
-    if 'csv' not in c:
-        m = str.lower(str((input('\nHow do you login to Strava? \nType one of the following and enter: google | facebook | email\n> '))))
-        args['m'] = m 
-        if 'google' in m:
-            su = str(input('\nEnter Google account email\n> '))
-            args['su'] = su
-            sp = str(input('Enter Google account password\n> '))
-            args['sp'] = sp
-        elif 'facebook' in m:
-            su = str(input('\nEnter Facebook account email\n> '))
-            args['su'] = su
-            sp = str(input('Enter Facebook account password\n> '))
-            args['sp'] = sp
-        else:
-            su = str(input('\nEnter Strava account email\n> '))
-            args['su'] = su
-            sp = str(input('Enter Strava account password\n> '))
-            args['sp'] = sp
-            
-    print('')
-    # Run!
-    driver(args)
-    
-from webbot import Browser
+import webbot_exe
+from webbot_exe import Browser
 import datetime
 import time
-from bs4 import BeautifulSoup
 import r2w_parser
+import R2WImportComments
+import pandas as pd
 
-def login_strava(username, password, web, method):
+def main():
+    args = {}
+        
+    print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\n')
+    
+    a = str(input('\nEnter date of first activity to collect (format: YYYY-MM-DD)\n> '))
+    args['a'] = a
+        
+    b = str(input('Enter date of last activity to collect (format: YYYY-MM-DD)\n> '))
+    args['b'] = b
+    
+    c = str.lower(str((input('\nChoose what you want to do with your Running2Win data.\n\n * csv = just download your data to a csv file\n\n * upload = just upload your R2W data to Strava\n\n * both = download a csv and upload data to Strava\n\n * comments = update existing activites on Strava with comments/notes/descriptions from Running2Win (activities missing from Strava will also be uploaded)\n\nType one of the following and enter: csv | upload | both | comments \n> '))))
+    args['c'] = c
+
+    if 'comments' in c:
+        print('\nYou\'ve chosen to upload comments from R2W to existing Strava activites. Please choose upload policies.\n')
+        p1 = str.lower(str((input('For a given day, if the incoming activity from Running2Win does not match the distance of any activities of that day on Strava, would you like to create a new activity or append the incoming description to the first existing activity on Strava?\nType one of the following: create | append\n> '))))
+        args['p1'] = p1
+            
+        p2 = str((input('\nIn meters, type how strict the matching policy should be. (i.e.  100  would only consider a R2W activity and a Strava activity a match if the difference of their distances is +/- 100 meters)\n> ')))
+        while not p2.isdecimal():
+            p2 = str(input('Type a whole number, in meters\n> '))
+        args['p2'] = int(p2)
+        
+    print()
+    
+    # Run!
+    driver(args)
+    return
+
+def login_strava(web):
     web.go_to('https:///www.strava.com/login')
+    print('\nHow do you login to Strava? Google | Facebook | Apple | Email')
+    method = str.lower(input(('\n> ')))
     if "google" in method:
-        print('Logging into Strava with Google...')
+        print('\nLogging into Strava with Google...')
         web.click('Log in using Google')
-        web.type(username, into = 'Email or phone')
-        web.click('Next')
         time.sleep(3)
-        web.type(password, classname = 'Xb9hP')
-        web.click('Next')
+        
+        user = input('\nEnter your Google account email\n> ')
+        web.type(user, id='identifierId')
+        
+        web.press(web.Key.ENTER)
+        time.sleep(2)
+        
+        pw = input('Enter your Google account password\n> ')
+        web.type(pw, into='Enter your password')
+        
+        web.press(web.Key.ENTER)
     elif 'facebook' in method:
-        print('Logging into Strava with Facebook...')
+        print('\nLogging into Strava with Facebook...')
         web.click('Log in using Facebook')
-        web.type(username, id='email')
-        web.type(password, id='pass')
+        time.sleep(3)
+        
+        user = input('\nEnter your Facebook account email\n> ')
+        web.type(user, id='email')
+        pw = input('Enter your Facebook account password\n> ')
+        web.type(pw, id='pass')
+        
         web.click(id='loginbutton')
-    else:
-        print('Logging into Strava with email/password...')
-        web.type(username, id='email')
-        web.type(password, id='password')
+    elif 'email' in method:
+        print('\nLogging into Strava with email/password...')
+        user = input('\nEnter your Strava account email\n> ')
+        web.type(user, id='email')
+        pw = input('Enter your Strava account password\n> ')
+        web.type(pw, id='password')
         web.click(id='login-button')
-    print('Successfully logged into Strava and beginning activity upload...\n')
-    time.sleep(5)
+        
+        time.sleep(5)
+        if len(web.find_elements(text = 'The username or password did not match. Please try again.')) != 0: 
+             print('Login failed. Please try again.\n')
+             login_strava(web)
+    else:
+        print('\nLogging into Strava with Apple ID')
+        web.click(id='apple-signin')
+        time.sleep(3)
+        
+        user = input('\nEnter your Apple ID\n> ')
+        web.type(user, id='account_name_text_field')
+        
+        web.click(id='sign-in')
+        time.sleep(1)
+        
+        pw = input('Enter your Apple account password\n> ')
+        web.type(pw, id='password_text_field')
+        
+        web.click(id='sign-in')
 
-def login_r2w(username, password, web):
+    time.sleep(5)
+    if 'strava.com' in web.get_current_url()[0:24]:
+        print('Successfully logged into Strava and beginning activity upload...\n')
+        return web
+    else:
+        print(input('\nCHECK YOUR PHONE FOR POTENTIAL TWO-FACTOR VERIFICATION PROMPT\n\nPress verification prompt on your phone or enter validation code here and press ENTER to continue\n> '))
+        if len(web.find_elements(classname = 'PrDSKc')) > 0:
+            web.click(classname='PrDSKc')
+        time.sleep(5)
+        if 'strava.com' in web.get_current_url()[0:24]:
+            print('Successfully logged into Strava and beginning activity upload...\n')
+            return web
+        else:
+            web.driver.close()
+            tmp = Browser(showWindow = True)
+            tmp.go_to('https://www.strava.com/login')
+            print(input('Issue logging in. Please login manually and press ENTER when done'))
+            time.sleep(5)
+            web.driver.set_window_position(-10000, 0)
+            tmp.driver.s
+            return tmp
+
+def login_r2w(web):
+    print('Loading Running2Win...\n')
     web.go_to('https://www.running2win.com/')
     web.click('LOG IN')
     time.sleep(2) # Prevent username from failing to enter
-    print('Logging into Running2Win...')
-    web.type(str(username), into='Username')
+    
+    web.type(input('Enter your Running2Win username\n> '), into='Username')
     web.click('NEXT' , tag='span')
-    web.type(str(password), into='Password')
+    web.type(input('Enter your Running2Win password\n> '), into='Password')
     web.click('Login')
-    print('Successfully logged into Running2Win and beginning activity download...\n')
+
+    time.sleep(5)
+    if len(web.find_elements(text = 'Invalid login. Please try again.')) == 0:
+        print('\nSuccessfully logged into Running2Win and beginning activity download...\n')
+    else:
+        print('Login failed. Please try again.\n')
+        login_r2w(web)
 
 def add_strava_entry(run, web):
+    web.go_to('https://www.strava.com/upload/manual')
+    
     # DISTANCE
-    web.type(run['distance'], id='activity_distance')
+    web.type(str(run['distance']), id='activity_distance')
     
     # TIME
     web.type(run['time'][0], id='activity_elapsed_time_hours')
@@ -175,7 +227,7 @@ def add_strava_entry(run, web):
     # SUBMIT
     web.click(xpath='/html/body/div[1]/div[3]/div[1]/form/div[6]/div/input')
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, length = 50, fill = '*', printEnd = "\r"):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 50, fill = '*', printEnd = '\r'):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """
@@ -183,43 +235,36 @@ def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, l
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + '-' * (length - filledLength)
-    print('\r%s |%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
+    print('\r%s|%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
     # Print New Line on Complete
     if iteration == total: 
         print()
 
 def to_csv(runs):
-    import pandas as pd
     for a in runs:
         tmp = a['time']
         if tmp[0] == 0:
-            time = f'{tmp[1]}:{tmp[2]}'
+            t = f'{tmp[1]}:{tmp[2]}'
         else:
-            time = f'{tmp[0]}:{tmp[1]}:{tmp[2]}'
-        a['time'] = time
+            t = f'{tmp[0]}:{tmp[1]}:{tmp[2]}'
+        a['time'] = t
     
     pd.DataFrame(runs).to_csv('activities.csv', index=False)
     print('\nActivities downloaded to \"activities.csv\" in the program\'s folder')
-
-def driver(args):
-    web = Browser(showWindow=False)
     
-    print('Loading https://www.running2win.com ...')
-    login_r2w(args['ru'], args['rp'], web)
+def r2w_download(start, end, web):
+    li = []
     
-    # Init iterator and date filters
-    tmp = (args['a']).split('-')
+    tmp = start.split('-')
     start = datetime.date(int(tmp[0]), int(tmp[1]), int(tmp[2]))
-    tmp = (args['b']).split('-')
+    tmp = end.split('-')
     end = datetime.date(int(tmp[0]),int(tmp[1]), int(tmp[2]))
-    delta = datetime.timedelta(weeks=8)
     
-    # helpers for progress bar
+    # Init iterator and progress bar helpers
+    delta = datetime.timedelta(weeks=8)
     total_days_str = str(end - start)
     if 'day' not in total_days_str: total_days = 1
     else: total_days = int(total_days_str[0:total_days_str.find(' day')])
-    
-    runs = [] # Master list for activities
     
     # Navigate to R2W running log and iterate through 8 week chunks
     count = 0
@@ -229,40 +274,55 @@ def driver(args):
         if upper > end:
             upper = end
             count = total_days
-        web.go_to('https://www.running2win.com/community/view-member-running-log.asp?sd='+ str(start) + '&ed=' + str(upper))
+        url = 'https://www.running2win.com/community/view-member-running-log.asp?sd='+ str(start) + '&ed=' + str(upper)
+        time.sleep(5)
+        web.go_to(url)
         start += delta + datetime.timedelta(days=1)
         
         file = web.get_page_source() # convert to html
         f = r2w_parser.log_to_html(file) # store html as text/text file
         t = r2w_parser.get_text(f) # strip text
         gathered = r2w_parser.runs_to_dict(t, f)
-        runs.extend(gathered)
+        li.extend(gathered)
         
-        progress = f'(Gathered {len(runs)} activities | Most Recent: ' + gathered[0]['date'] + ')'
-        printProgressBar(count, total_days, suffix=progress)
+        progress = f'| Gathered {len(li)} activities | Most Recent: ' + gathered[0]['date']
+        printProgressBar(count, total_days, suffix = progress)
+    
+    return li
+
+def driver(args):       
+    web = Browser(showWindow=False)
+    login_r2w(web)
+    
+    # Master list of R2W activities
+    runs = r2w_download(args['a'], args['b'], web) 
+        
+    if 'comments' in args['c']: 
+        return R2WImportComments.main(runs, web, args['a'], args['b'], args['p1'], args['p2']) # let R2WImportComments handle the rest
         
     # CSV download
     if 'csv' in args['c']:
         to_csv(runs)
         web.driver.close()
+        return
     elif 'both' in args['c']:
         to_csv(runs)
     
-    print("\nLoading https://www.strava.com ...")
-    login_strava(args['su'], args['sp'], web, args['m'])
+    web = login_strava(web)
     
     # Strava upload
     count = 0
     for i in runs:
-        web.go_to('https://www.strava.com/upload/manual')
         add_strava_entry(i, web)
+        curr_date = i['date']
         
         count += 1
-        progress = f'(Added activity on ' + i['date'] + f' to Strava | Total = {count} of {len(runs)})'
-        printProgressBar(count, len(runs), suffix=progress)
+        progress = f'| Added activity on {curr_date} to Strava | Total = {count} of {len(runs)}'
+        printProgressBar(count, len(runs), decimals=2, suffix = progress)
         
     web.driver.close()
     print(f'\nSuccessfully added {count} activities to Strava!')
+    return
     
 if __name__ == '__main__':
     main()    

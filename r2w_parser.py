@@ -44,7 +44,8 @@ def runs_to_dict(html, soup):
         
     for r in runs:
         # date
-        date = r[r.find('y,') + 3:r.find(' |')]
+        r = r[r.find('day, ') + 5:]
+        date = r[:r.find(' |')]
     
         # title and type
         r = r[r.find(' |') + 1:]
@@ -53,20 +54,21 @@ def runs_to_dict(html, soup):
         _type = r[:r.find(' |')] 
         title += ' ' + _type
             
-        # distance/time
+        # distance and time
         r = r[r.find('distance |') + 11:]
         distance = r[:r.find(' |'):]
-        if ':' in distance:
+        if ':' in distance: # time
             r = r[r.find('in'):] # time
-            time = r[3:r.find(' [')] # time
+            time = r[3:r.find(' [')]
         else: time = '0' # time
         if '-' in distance: distance = '0.01'; # distance
         else: distance = str(parse_distance(distance)); # distance
             
         # description
         r = r[r.find('| Comments |') + 13:]
-        description = r[:r.find(' |')]
+        description = r[:r.find(' | Private Notes')]
         if description == 'Private Notes': description = ' '; # check for empty description
+        description = description.replace('| ', '\n')
         
         # difficulty
         difficulty = 1
@@ -106,7 +108,7 @@ def runs_to_dict(html, soup):
     
         # add to dict
         _dict = {'date': parse_date(date), 'type': _type, 'title': title, 'distance': distance, 'time': parse_time(time), 'description': description, 'difficulty': difficulty, 'avg_hr': avg_hr, 'max_hr': max_hr}
-        #print(_dict)
+
         master_list.append(_dict)
         
     return master_list
@@ -140,8 +142,7 @@ def parse_intervals(table):
     
     for td in rows[0].find_all("td"):
         headings.append(td.text.replace('\n', ' ').strip())
-        
-    #print(headings)
+
     rows = rows[1:]
     table = []
     
@@ -150,9 +151,8 @@ def parse_intervals(table):
         tmp = []
         for c in cols:
             tmp.append(c.text.replace('\n', '').strip())
-            #print(c.text)
+
         table.append(tmp)
-    #print(table)
     
     tmp = ' | '.join(['{:^1}'.format(i) for i in headings])
     desc += tmp + '\n'
@@ -207,7 +207,7 @@ def parse_race(r):
 def parse_comments(r):
     desc = '\n\nComments:\n\n'
     r = r[r.find('Action |') + 8:]
-    #print(r)
+
     while len(r) > 0:
         desc += '(' + r[1:r.find(' |')] + '): '
         r = r[r.find(' |') + 3:]
