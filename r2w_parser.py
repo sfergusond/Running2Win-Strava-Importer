@@ -72,8 +72,11 @@ def runs_to_dict(html, soup):
         
         # difficulty
         difficulty = 1
-        r = r[r.find('[Rating: ') + 9:]
-        difficulty = int(r[:r.find(']')])
+        #r = r[r.find('[Rating: ') + 9:]
+        try:
+            difficulty = int(r[r.find('[Rating: ') + 9:r.find(']')])
+        except:
+            difficulty = 1
         
         if _type == 'Cross Training/Other' or _type == 'Other':
             r = r[r.find('Cross Training Info: |') + 56:]

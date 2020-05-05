@@ -13,6 +13,7 @@ https://github.com/sfergusond
 
 Implmentation of comment/description only upload
 
+# Crash on google login
 
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
@@ -22,6 +23,7 @@ import webbot_exe
 import StravaHelper
 import R2WImporter
 import datetime
+import time
 
 def main(r2w_data, web, a, b, policy, variance):        
     
@@ -49,6 +51,8 @@ def main(r2w_data, web, a, b, policy, variance):
 def upload(activities, web):
     count = 0
     for a in activities:
+        t1 = time.time()
+        
         url = 'https://www.strava.com/activities/' + str(a[0]) + '/edit'
         web.go_to(url)
         web.type('\n\n' + a[2], clear=False, id='activity_description')
@@ -56,7 +60,8 @@ def upload(activities, web):
         
         count += 1
         progress = 'Updating Descriptions...'
-        printProgressBar(count, len(activities), prefix = progress)
+        t2 = time.time()
+        printProgressBar(count, len(activities), prefix = progress, t1 = t1, t2 = t2)
     
     web.driver.close()
     
@@ -65,6 +70,7 @@ def add_desc(r2w, strava, policy, variance, web):
     tmp = strava
     count = 0
     for r in r2w:
+        t1 = time.time()
         if strava.get(r['date']) != None: #r['date'] in list(strava.keys()):
             index = match(r['distance'], tmp[r['date']], variance)
             if index != -1: # if a match exists, add
@@ -81,8 +87,11 @@ def add_desc(r2w, strava, policy, variance, web):
                     r['distance'] = upload_distance(r['distance'])
                     R2WImporter.add_strava_entry(r, web)
                 else: # add to existing activity
-                    tmp[r['date']][0][2] = ('\n' + r['description']) # clear previos desc and append
-                    result.append(tmp[r['date']][index])
+                    if len(tmp[r['date']][0]) == 2: # desc already appended
+                        tmp[r['date']][0].append(r['description'])
+                    else: # no desc exists
+                        tmp[r['date']][0][2] += ('\n' + r['description'])
+                    result.append(tmp[r['date']][0])
         else: # No acitvity exists for the current day in the R2W dataset
             r['date'] = upload_date(r['date'])
             r['distance'] = upload_distance(r['distance'])
@@ -90,7 +99,8 @@ def add_desc(r2w, strava, policy, variance, web):
             
         count += 1
         progress = 'Adding new activities...'
-        printProgressBar(count, len(r2w), prefix = progress)
+        t2 = time.time()
+        printProgressBar(count, len(r2w), prefix = progress, t1 = t1, t2 = t2)
 
     upload(result, web)
     
@@ -163,15 +173,25 @@ def read_csv(a, b): # only needed locally
             
     return li
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 2, length = 50, fill = '*', printEnd = "\r"):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 25, fill = '*', printEnd = '\r', t1 = None, t2 = None, step = 1):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """
+    if t1 != None and t2 != None:
+        if iteration < total:
+            remaining = (t2-t1)*((total/step) - (iteration/step))
+        else: remaining = 0
+        est_time = str(datetime.timedelta(seconds=remaining))
+    else:
+        est_time = ''
     
+    if est_time != '':    
+        est_time = ' (' + str(est_time[:est_time.find('.')]) + ' remaining)'
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
-    print('\r%s|%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
+    bar = fill * filledLength + ' ' * (length - filledLength)
+    print(f'\r{prefix} |{bar}| {percent}% ({est_time} remaining)', end = printEnd)
+    #print('\r%s|%s| %s%% %s%s' % (prefix, bar, percent, suffix, est_time), end = printEnd, flush = True)
     # Print New Line on Complete
     if iteration == total: 
         print()

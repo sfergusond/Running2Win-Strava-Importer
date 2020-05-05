@@ -25,7 +25,7 @@ Features
     If csv is entered in the upload/csv prompt, then all gathered activities will be downloaded to a CSV file in the same directory as the downloaded program.
     If upload is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
 
-TO DO: Stalling gathering lots of r2w data??
+TO DO: TIME ESTIMATE
 
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
@@ -42,18 +42,33 @@ def main():
         
     print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\n')
     
-    a = str(input('\nEnter date of first activity to collect (format: YYYY-MM-DD)\n> '))
+    valid = False
+    while not valid:
+        a = str(input('\nEnter date of first activity to collect (format: YYYY-MM-DD)\n> '))
+        valid = validate_date(a)
     args['a'] = a
         
-    b = str(input('Enter date of last activity to collect (format: YYYY-MM-DD)\n> '))
+    valid = False
+    while not valid:
+        b = str(input('Enter date of last activity to collect (format: YYYY-MM-DD)\n> '))
+        valid = validate_date(b, a)
     args['b'] = b
     
-    c = str.lower(str((input('\nChoose what you want to do with your Running2Win data.\n\n * csv = just download your data to a csv file\n\n * upload = just upload your R2W data to Strava\n\n * both = download a csv and upload data to Strava\n\n * comments = update existing activites on Strava with comments/notes/descriptions from Running2Win (activities missing from Strava will also be uploaded)\n\nType one of the following and enter: csv | upload | both | comments \n> '))))
+    valid = False
+    while not valid:
+        c = str.lower(str((input('\nChoose what you want to do with your Running2Win data.\n\n * csv = just download your data to a csv file\n\n * upload = just upload your R2W data to Strava\n\n * both = download a csv and upload data to Strava\n\n * comments = update existing activites on Strava with comments/notes/descriptions from Running2Win (activities missing from Strava will also be uploaded)\n\nType one of the following and enter: csv | upload | both | comments \n> '))))
+        if c == 'csv' or c == 'upload' or c == 'both' or c == 'comments':
+            valid = True
     args['c'] = c
 
     if 'comments' in c:
         print('\nYou\'ve chosen to upload comments from R2W to existing Strava activites. Please choose upload policies.\n')
-        p1 = str.lower(str((input('For a given day, if the incoming activity from Running2Win does not match the distance of any activities of that day on Strava, would you like to create a new activity or append the incoming description to the first existing activity on Strava?\nType one of the following: create | append\n> '))))
+        
+        valid = False
+        while not valid:
+            p1 = str.lower(str((input('For a given day, if the incoming activity from Running2Win does not match the distance of any activities of that day on Strava, would you like to create a new activity or append the incoming description to the first existing activity on Strava?\nType one of the following: create | append\n> '))))
+            if p1 == 'create' or p1 == 'append':
+                valid = True
         args['p1'] = p1
             
         p2 = str((input('\nIn meters, type how strict the matching policy should be. (i.e.  100  would only consider a R2W activity and a Strava activity a match if the difference of their distances is +/- 100 meters)\n> ')))
@@ -64,8 +79,55 @@ def main():
     print()
     
     # Run!
+    # DEBUG test = {'a':'2020-01-01', 'b':'2020-05-05', 'c':'comments', 'p1':'append','p2':'create'}
     driver(args)
     return
+
+def validate_date(date, s = None):
+    d = date.split('-')
+    
+    if len(d) < 3: 
+        print('Invalid input')
+        return False
+    try:
+        yr = int(d[0])
+    except:
+        print('Invalid year')
+        return False
+    try:
+        mo = int(d[1])
+    except:
+        print('Invalid month')
+        return False   
+    try:
+        day = int(d[2])
+    except:
+        print('Invalid day')
+        return False 
+    
+    if yr < 1980:
+        print('Invalid year')
+        return False
+    if mo < 1 or mo > 12:
+        print('Invalid month')
+        return False
+    if day < 1 or day > 31:
+        print('Invalid day')
+        return False
+    
+    if s != None:
+        start = s.split('-')
+        start = datetime.date(int(start[0]),int(start[1]), int(start[2]))
+        end = datetime.date(int(d[0]), int(d[1]), int(d[2]))
+        dif = str(end-start)
+        if 'day' not in dif: return True
+        dif = int(dif[:dif.find(' day')])
+        if dif < 0:
+            print('End date must be later than start date')
+            return False
+        
+    return True
+    
 
 def login_strava(web):
     web.go_to('https:///www.strava.com/login')
@@ -131,11 +193,13 @@ def login_strava(web):
         return web
     else:
         print(input('\nCHECK YOUR PHONE FOR POTENTIAL TWO-FACTOR VERIFICATION PROMPT\n\nPress verification prompt on your phone or enter validation code here and press ENTER to continue\n> '))
+        time.sleep(5)
         if len(web.find_elements(classname = 'PrDSKc')) > 0:
             web.click(classname='PrDSKc')
         time.sleep(5)
         if 'strava.com' in web.get_current_url()[0:24]:
             print('Successfully logged into Strava and beginning activity upload...\n')
+            web.switch_to_tab(number = 1)
             return web
         else:
             web.driver.close()
@@ -143,8 +207,7 @@ def login_strava(web):
             tmp.go_to('https://www.strava.com/login')
             print(input('Issue logging in. Please login manually and press ENTER when done'))
             time.sleep(5)
-            web.driver.set_window_position(-10000, 0)
-            tmp.driver.s
+            tmp.driver.set_window_position(-10000, 0)
             return tmp
 
 def login_r2w(web):
@@ -154,8 +217,9 @@ def login_r2w(web):
     time.sleep(2) # Prevent username from failing to enter
     
     web.type(input('Enter your Running2Win username\n> '), into='Username')
-    web.click('NEXT' , tag='span')
     web.type(input('Enter your Running2Win password\n> '), into='Password')
+    '''DEBUGweb.type("F  D", into='Username')
+    web.type('Orange%ID', into='Password')'''
     web.click('Login')
 
     time.sleep(5)
@@ -227,15 +291,25 @@ def add_strava_entry(run, web):
     # SUBMIT
     web.click(xpath='/html/body/div[1]/div[3]/div[1]/form/div[6]/div/input')
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 50, fill = '*', printEnd = '\r'):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 25, fill = '*', printEnd = '\r', t1 = None, t2 = None, step = 1):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
-    """
+    """    
+    if t1 != None and t2 != None:
+        if iteration < total:
+            remaining = (t2-t1)*((total/step) - (iteration/step))
+        else: remaining = 0
+        est_time = str(datetime.timedelta(seconds=remaining))
+    else:
+        est_time = '0:00:00.'
+        
+    est_time = est_time[:est_time.find('.'):]
     
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
-    bar = fill * filledLength + '-' * (length - filledLength)
-    print('\r%s|%s| %s%% %s' % (prefix, bar, percent, suffix), end = printEnd)
+    bar = fill * filledLength + ' ' * (length - filledLength)
+    print(f'\r{est_time} remaining {prefix} |{bar}| {percent}% {suffix}', end = printEnd, flush = True)
+    #print('\r%s remaining %s|%s| %s%% %s' % (est_time, prefix, bar, percent, suffix), end = printEnd, flush = True)
     # Print New Line on Complete
     if iteration == total: 
         print()
@@ -268,7 +342,10 @@ def r2w_download(start, end, web):
     
     # Navigate to R2W running log and iterate through 8 week chunks
     count = 0
+    
     while start < end:
+        t1 = time.time()
+        
         count += 56
         upper = start + delta
         if upper > end:
@@ -285,8 +362,9 @@ def r2w_download(start, end, web):
         gathered = r2w_parser.runs_to_dict(t, f)
         li.extend(gathered)
         
+        t2 = time.time()
         progress = f'| Gathered {len(li)} activities | Most Recent: ' + gathered[0]['date']
-        printProgressBar(count, total_days, suffix = progress)
+        printProgressBar(count, total_days, suffix = progress, t1 = t1, t2 = t2, step = 56)
     
     return li
 
@@ -313,13 +391,15 @@ def driver(args):
     # Strava upload
     count = 0
     for i in runs:
+        t1 = time.time()
         time.sleep(1)
         add_strava_entry(i, web)
         curr_date = i['date']
         
         count += 1
+        t2 = time.time()
         progress = f'| Added activity on {curr_date} to Strava | Total = {count} of {len(runs)}'
-        printProgressBar(count, len(runs), decimals=2, suffix = progress)
+        printProgressBar(count, len(runs), decimals=2, suffix = progress, t1= t1, t2 = t2)
         
     web.driver.close()
     print(f'\nSuccessfully added {count} activities to Strava!')
