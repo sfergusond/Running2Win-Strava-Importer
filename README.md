@@ -21,7 +21,7 @@ Open Spotlight search (I think that's what the main search thing is called? idk,
 ### 4) A few commands
 Copy/paste the following commands, one at a time into the field denoted by the `$` _(press ENTER after entering each line and wait for a new line beginning with_ `$` _to appear again before moving on to the next one)_
 
-1) `cd Desktop/r2wimporter`  _(if that didn't work, [see this quick article about how to open a terminal at a specific folder](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You want to open the terminal in the folder on your desktop called __r2wimporter__)_
+1) `cd Desktop/r2wimporter`  _(nothing really happens if it worked, if you get an error, [see this quick article about how to open a terminal at a specific folder](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You want to open the terminal in the folder on your desktop called __r2wimporter__)_
 2) `python3 --version` _(if that doesn't output a single line with something like_ `Python3.8` _then you need to [download Python3.8](https://www.python.org/ftp/python/3.8.3/python-3.8.3rc1-macosx10.9.pkg). See screenshot below)_
 
 ![SCREENSHOT2](https://github.com/sfergusond/imgdump/blob/master/s3.png?raw=true)
