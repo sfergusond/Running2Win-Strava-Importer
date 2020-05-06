@@ -65,7 +65,7 @@ def main():
         
         valid = False
         while not valid:
-            p1 = str.lower(str((input('For a given day, if the incoming activity from Running2Win does not match the distance of any activities of that day on Strava, would you like to create a new activity or append the incoming description to the first existing activity on Strava?\nType one of the following: create | append | ignore\n> '))))
+            p1 = str.lower(str((input('For a given day, if the incoming activity from Running2Win does not match the distance of any activities of that day on Strava, would you like to create a new activity, append the incoming description to the first existing activity on Strava, or do nothing (ignore)?\nType one of the following: create | append | ignore\n> '))))
             if p1 == 'create' or p1 == 'append' or p1 == 'ignore':
                 valid = True
         args['p1'] = p1
