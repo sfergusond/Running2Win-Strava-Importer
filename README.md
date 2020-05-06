@@ -16,12 +16,12 @@ __Drag the folder to the desktop.__ Open the folder, and it should look like thi
 ![SCREENSHOT1](https://github.com/sfergusond/imgdump/blob/master/s4.png?raw=true)
 
 ### 3) Open a terminal window
-Open Spotlight search (I think that's what the main search thing is called? idk, I don't use a Mac) and search for __terminal__. Double click the first result.
+Open Spotlight search (I think that's what the main search thing is called? idk, I don't use a Mac) and search for __terminal__. Double click the first result. Make the window about twice as big, the program's output will format really weirdly otherwise.
 
 ### 4) A few commands
 Copy/paste the following commands, one at a time into the field denoted by the `$` _(press ENTER after entering each line and wait for a new line beginning with_ `$` _to appear again before moving on to the next one)_
 
-1) `cd Desktop/r2wimporter`  _(nothing really happens if it worked, if you get an error, [see this quick article about how to open a terminal at a specific folder](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You want to open the terminal in the folder on your desktop called __r2wimporter__)_
+1) `cd Desktop/r2wimporter`  _(nothing really happens if it worked, if you get an error, [see this quick article about how to open a terminal at a specific folder](https://www.groovypost.com/howto/open-command-window-terminal-window-specific-folder-windows-mac-linux/). You want to open the terminal at the folder on your desktop called __r2wimporter__)_
 2) `python3 --version` _(if that doesn't output a single line with something like_ `Python3.8` _then you need to [download Python3.8](https://www.python.org/ftp/python/3.8.3/python-3.8.3rc1-macosx10.9.pkg). See screenshot below)_
 
 ![SCREENSHOT2](https://github.com/sfergusond/imgdump/blob/master/s3.png?raw=true)
