@@ -6,7 +6,7 @@ Automatically imports running2win activity data, including descriptions and comm
 ### 1) Download the program
 [Click here to download the zip folder with the program files](https://drive.google.com/file/d/11l9bT0uf3kwYhl7FL-KqkdouRBv9GI3c/view?usp=sharing). 
 
-While you're at this step, go to chrome://settings/help and make sure you have at least __Chome Version 81__ installed.
+While you're at this step, go to `chrome://settings/help` and make sure you have at least __Chome Version 81__ installed.
 
 ### 2) Extract files
 Once downloaded, double click on __r2wimporter.zip__ to extract all the files into their own folder (it'll be called __r2wimporter__ even though the screenshot has a different name). 
@@ -51,7 +51,7 @@ You probably have typos in your username/password information:
 ### 1) Download the code
 [Click here to download the zip folder with the program files](https://drive.google.com/file/d/1g1406XJyo4tJwee1R8f9-rd0ccGOL84U/view?usp=sharing). Double click __R2WImporter.zip__ to extract the files.
 
-While you're at this step, go to chrome://settings/help and make sure you have at least __Chome Version 81__ installed.
+While you're at this step, go to `chrome://settings/help` and make sure you have at least __Chome Version 81__ installed.
 
 ### 2) Run the program
 Double click on __R2WImporter.exe__ to run the program. _It will take about 5-10 seconds to load once the window pops up._
