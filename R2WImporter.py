@@ -37,8 +37,7 @@ import os
 
 def main():
     args = {}
-    os.system('mode 140,30')    
-      
+
     print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\n')
     
     valid = False
@@ -299,7 +298,7 @@ def add_strava_entry(run, web):
     # SUBMIT
     web.click(xpath='/html/body/div[1]/div[3]/div[1]/form/div[6]/div/input')
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 50, fill = '*', printEnd = '\r', t1 = None, t2 = None, step = 1):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 50, printEnd = '\r', t1 = None, t2 = None, step = 1):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """    
@@ -312,6 +311,8 @@ def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, l
         est_time = '0:00:00.'
         
     est_time = est_time[:est_time.find('.'):]
+    fill = '█'
+    length = 50
     
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)

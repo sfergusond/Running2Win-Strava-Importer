@@ -55,15 +55,9 @@ class Browser:
         if(not showWindow):
             options.set_headless(headless=True) ; 
 
-        if sys.platform == 'linux' or sys.platform == 'linux2':
-            driverfilename = 'chrome_linux'
-            driverpath = resource_path("./driver/chrome_linux.exe")
-        elif sys.platform == 'win32':
-            driverfilename = 'chromedriver.exe'
-            driverpath = resource_path("./driver/chromedriver.exe")
-        elif sys.platform == 'darwin':
-            driverfilename = 'chrome_mac'
-            driverpath = resource_path("./driver/chrome_mac.exe")
+
+        driverfilename = 'chrome_mac'
+        driverpath = resource_path("driver/chrome_mac")
             
             
         #driverpath = 'C:/Users/sferg/Anaconda3/Lib/site-packages/webbot/drivers/chrome_windows.exe'
