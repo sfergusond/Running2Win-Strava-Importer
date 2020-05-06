@@ -173,7 +173,7 @@ def read_csv(a, b): # only needed locally
             
     return li
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = '\r', t1 = None, t2 = None, step = 1):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '*', printEnd = '\r', t1 = None, t2 = None, step = 1):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """
