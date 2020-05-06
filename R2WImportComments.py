@@ -13,8 +13,6 @@ https://github.com/sfergusond
 
 Implmentation of comment/description only upload
 
-# Crash on google login
-
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
 import csv # won't need this when deployed

@@ -76,7 +76,6 @@ def main():
         args['p2'] = int(p2)
     
     # Run!
-    # DEBUG test = {'a':'2020-01-01', 'b':'2020-05-05', 'c':'comments', 'p1':'append','p2':'create'}
     driver(args)
     return
 
@@ -372,10 +371,6 @@ def r2w_download(start, end, web):
         t2 = time.time()
         progress = f' (Gathered {len(li)} activities | Most Recent: ' + gathered[0]['date'] + ')'
         printProgressBar(count, total_days, suffix = progress, t1 = t1, t2 = t2, step = 56)
-    
-    with open('out.txt', 'w') as f:
-        for i in li:
-            print(i, end = '\n\n', file = f)
     
     return li
 

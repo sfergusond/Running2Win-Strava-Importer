@@ -40,8 +40,6 @@ def initialize_client(url = None, web = None, scope = '', CLIENT_ID = STRAVA_CLI
 # keeps only athlete, distance, elapsed_time, elev_high, elev_low, max_speed, moving_time, name, total_elevation_gain, and start_date_local
 # auto filter for type == 'Run' and length > 4.8km
 def activities(date_after, date_before, client = None, keep = None, token = None):
-    
-    #runs = client.get_logged_in_athlete_activities(after = date_after, before = date_before)
     runs = client.get_activities(before=date_before, after=date_after)
     
     li = []
