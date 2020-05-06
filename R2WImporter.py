@@ -4,10 +4,8 @@ Created on Thu Apr 30 12:04:19 2020
 Author: Spencer Ferguson-Dryden
 https://github.com/sfergusond
 
-TO DO: Implement description-only upload
-
 Features
-    Gathers all activity data from Running2Win, including non-running activities such as Cross Training, NO RUN - OFF, and Other activity types. Activites will be gather beginning from the specified begin date to the specified end date.
+    Gathers all activity data from Running2Win, including non-running activities such as Cross Training, NO RUN - OFF, and Other activity types. Activites are gathered beginning from the specified begin date to the specified end date.
     For each activity, the following information is retrieved:
         Date
         Distance
@@ -24,8 +22,7 @@ Features
             Member Comments
     If csv is entered in the upload/csv prompt, then all gathered activities will be downloaded to a CSV file in the same directory as the downloaded program.
     If upload is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
-
-TO DO: TIME ESTIMATE
+    If comment is entered in the upload/csv prompt, then R2WImporter will attempt to match descriptions from R2W with activities existing on Strava. User specifies how strict the matching policy is and what to do if no match is found (append incoming decscription to an existing Strava activity or create a new activity or ignore). Missing activities from Strava will be automatically uploaded.
 
 Uses: webbot from https://github.com/nateshmbhat/webbot
 """
@@ -36,10 +33,12 @@ import time
 import r2w_parser
 import R2WImportComments
 import pandas as pd
+import os
 
 def main():
     args = {}
-        
+    os.system('mode 140,30')    
+      
     print('\nStarting R2W Importer\n\nPlease fill out the following fields and hit ENTER on your keyboard after typing each entry.\n')
     
     valid = False
@@ -66,8 +65,8 @@ def main():
         
         valid = False
         while not valid:
-            p1 = str.lower(str((input('For a given day, if the incoming activity from Running2Win does not match the distance of any activities of that day on Strava, would you like to create a new activity or append the incoming description to the first existing activity on Strava?\nType one of the following: create | append\n> '))))
-            if p1 == 'create' or p1 == 'append':
+            p1 = str.lower(str((input('For a given day, if the incoming activity from Running2Win does not match the distance of any activities of that day on Strava, would you like to create a new activity or append the incoming description to the first existing activity on Strava?\nType one of the following: create | append | ignore\n> '))))
+            if p1 == 'create' or p1 == 'append' or p1 == 'ignore':
                 valid = True
         args['p1'] = p1
             
@@ -75,8 +74,6 @@ def main():
         while not p2.isdecimal():
             p2 = str(input('Type a whole number, in meters\n> '))
         args['p2'] = int(p2)
-        
-    print()
     
     # Run!
     # DEBUG test = {'a':'2020-01-01', 'b':'2020-05-05', 'c':'comments', 'p1':'append','p2':'create'}
@@ -132,7 +129,11 @@ def validate_date(date, s = None):
 def login_strava(web):
     web.go_to('https:///www.strava.com/login')
     print('\nHow do you login to Strava? Google | Facebook | Apple | Email')
-    method = str.lower(input(('\n> ')))
+    valid = False
+    while not valid:
+        method = str.lower(input(('\n> ')))
+        if method == 'google' or method == 'facebook' or method == 'apple' or method == 'email': valid = True
+        
     if "google" in method:
         print('\nLogging into Strava with Google...')
         web.click('Log in using Google')
@@ -299,7 +300,7 @@ def add_strava_entry(run, web):
     # SUBMIT
     web.click(xpath='/html/body/div[1]/div[3]/div[1]/form/div[6]/div/input')
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 25, fill = '█', printEnd = '\r', t1 = None, t2 = None, step = 1):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 50, fill = '█', printEnd = '\r', t1 = None, t2 = None, step = 1):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """    
@@ -315,9 +316,8 @@ def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, l
     
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
-    bar = fill * filledLength + ' ' * (length - filledLength)
-    print(f'\r{est_time} remaining {prefix} |{bar}| {percent}% {suffix}', end = printEnd, flush = True)
-    #print('\r%s remaining %s|%s| %s%% %s' % (est_time, prefix, bar, percent, suffix), end = printEnd, flush = True)
+    bar = fill * filledLength + '_' * (length - filledLength)
+    print(f'\r{est_time} remaining {prefix} |{bar}| {percent}% {suffix}', end = printEnd)
     # Print New Line on Complete
     if iteration == total: 
         print()
@@ -350,7 +350,6 @@ def r2w_download(start, end, web):
     
     # Navigate to R2W running log and iterate through 8 week chunks
     count = 0
-    
     while start < end:
         t1 = time.time()
         
@@ -362,7 +361,7 @@ def r2w_download(start, end, web):
         url = 'https://www.running2win.com/community/view-member-running-log.asp?sd='+ str(start) + '&ed=' + str(upper)
         time.sleep(5)
         web.go_to(url)
-        start += delta + datetime.timedelta(days=1)
+        start = upper + datetime.timedelta(days=1)
         
         file = web.get_page_source() # convert to html
         f = r2w_parser.log_to_html(file) # store html as text/text file
@@ -371,8 +370,12 @@ def r2w_download(start, end, web):
         li.extend(gathered)
         
         t2 = time.time()
-        progress = f'| Gathered {len(li)} activities | Most Recent: ' + gathered[0]['date']
+        progress = f' (Gathered {len(li)} activities | Most Recent: ' + gathered[0]['date'] + ')'
         printProgressBar(count, total_days, suffix = progress, t1 = t1, t2 = t2, step = 56)
+    
+    with open('out.txt', 'w') as f:
+        for i in li:
+            print(i, end = '\n\n', file = f)
     
     return li
 
@@ -406,8 +409,8 @@ def driver(args):
         
         count += 1
         t2 = time.time()
-        progress = f'| Added activity on {curr_date} to Strava | Total = {count} of {len(runs)}'
-        printProgressBar(count, len(runs), decimals=2, suffix = progress, t1= t1, t2 = t2)
+        progress = f' (Added new activity on {curr_date})'
+        printProgressBar(count, len(runs), decimals=2, suffix = progress, length = 70, t1= t1, t2 = t2)
         
     web.driver.close()
     print(f'\nSuccessfully added {count} activities to Strava!')

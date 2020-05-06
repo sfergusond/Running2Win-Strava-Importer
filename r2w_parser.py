@@ -60,31 +60,34 @@ def runs_to_dict(html, soup):
         if ':' in distance: # time
             r = r[r.find('in'):] # time
             time = r[3:r.find(' [')]
-        else: time = '0' # time
-        if '-' in distance: distance = '0.01'; # distance
-        else: distance = str(parse_distance(distance)); # distance
+        else: 
+            time = '0' # time
+        if '-' in distance: 
+            distance = '0.01'; # distance
+        else:
+            distance = str(parse_distance(distance))
             
         # description
         r = r[r.find('| Comments |') + 13:]
         description = r[:r.find(' | Private Notes')]
-        if description == 'Private Notes': description = ' '; # check for empty description
+        if 'Private Notes' in description[0:15]: 
+            description = ' '; # check for empty description
         description = description.replace('| ', '\n')
         
         # difficulty
         difficulty = 1
-        #r = r[r.find('[Rating: ') + 9:]
         try:
             difficulty = int(r[r.find('[Rating: ') + 9:r.find(']')])
         except:
             difficulty = 1
         
-        if _type == 'Cross Training/Other' or _type == 'Other':
+        if _type == 'Cross Training/Other' or _type == 'Other' or 'Cross Training Info:' in r:
             r = r[r.find('Cross Training Info: |') + 56:]
             xt_type = r[:r.find(' |')]
             if xt_type == 'Weights (general)': _type = 'Weight Training'
             elif xt_type == 'Swimming': _type = 'Swim'
             elif xt_type == 'Skating': _type = 'Ice Skate'
-            elif xt_type == 'Rollerblading': _type = 'Inline Skate '
+            elif xt_type == 'Rollerblading': _type = 'Inline Skate'
             elif xt_type == 'Walking': _type = 'Walk'
             elif xt_type == 'Pilates': _type = 'Yoga'
             elif xt_type == 'Skiing': _type = 'Alpine Ski'
@@ -92,7 +95,7 @@ def runs_to_dict(html, soup):
             description += parse_xt(r)
     
         if 'Race Information:' in r:
-            description += parse_race(r[r.find('Race Information:') + 31:r.find('| more...')])
+            description += parse_race(r[r.find('Race Information:') + 31:])
             
         if 'Interval Information:' in r:
             description += '\n' + parse_intervals(interval_tables[interval_count])
@@ -108,7 +111,7 @@ def runs_to_dict(html, soup):
         r = r[r.find('| Workout Comments by Members') + 29:r.find('| Add Workout Comment')]
         if len(r) > 1:
             description += parse_comments(r)
-    
+            
         # add to dict
         _dict = {'date': parse_date(date), 'type': _type, 'title': title, 'distance': distance, 'time': parse_time(time), 'description': description, 'difficulty': difficulty, 'avg_hr': avg_hr, 'max_hr': max_hr}
 
@@ -121,17 +124,16 @@ def parse_xt(r):
     desc += r[:r.find(' |')] 
     
     desc += '\n Description: '
-    
     r = r[r.find(' | ') + 3:]
-    r = r[r.find(' |' ) + 3:]
+    r = r[4:]
     
-    desc += r[:r.find(' |')]
+    tmp = r[:r.find(' |')]
+    if not 'Cross Training Comments' in tmp: 
+        desc += tmp
     
-    desc += '\n Comments :'
-    
-    r = r[r.find('Cross Training Comments: | ') + 27:]
-    
-    desc += r[r.find(' |')]
+    if 'Cross Training Comments' in r:
+        r = r[r.find('Cross Training Comments: | ') + 27:r.find(' | more')]
+        desc += f'\nComments: {r}'
     
     return desc
 
@@ -185,20 +187,20 @@ def parse_race(r):
     if splits == ' Cool Down': splits = '';
     
     unit = distance[distance.find(chr(0xa0)) + 1:]
-    if 'Mile' in unit:
+    if 'mile' in str.lower(unit):
         pace_per_mile = parse_time(time, True)/float(distance[:distance.find(chr(0xa0))])
-    elif 'Kilo' in unit:
+    elif 'kilo' in str.lower(unit):
         pace_per_mile = parse_time(time, True)/(float(distance[:distance.find(chr(0xa0))]) * 0.621371)
-    elif 'Meter' in unit:
+    elif 'meter' in str.lower(unit):
         pace_per_mile = parse_time(time, True)/(float(distance[:distance.find(chr(0xa0))]) * 0.000621371)
     else:
         pace_per_mile = parse_time(time, True)/(float(distance[:distance.find(chr(0xa0))]) * 0.000568182)
     mm = int(pace_per_mile//60)
     ss = round(pace_per_mile % 60, 2)
-    pace_per_mile = str(mm) + ':' + str(ss)
+    pace_per_mile = str(mm) + ':' + '{:05}'.format(ss)
     
     place = r[:r.find(' |')]
-    r = r[r.find('Comments |') + 10:]
+    r = r[r.find('Comments |') + 10:r.find( '| more...')]
     if place == 'Age Place': place = '';
     
     comments = r
@@ -221,19 +223,25 @@ def parse_comments(r):
     return desc
 
 def parse_distance(distance):
-    unit = distance[distance.find(' ') + 1:]
+    unit = str.lower(distance[distance.find(' '):])
+    if 'in' in unit:
+        unit = unit[:unit.find( 'in')]
     dist = distance[:distance.find(' ')]
     
-    if 'Mile' in unit:
-        return round(float(dist), 2)
-    elif 'Kilo' in unit:
-        return round(float(dist) * 0.621371, 2)
-    elif 'Meter' in unit:
-        return round(float(dist) * 0.000621371, 2)
-    else:
-        return round(float(dist) * 0.000568182, 2)
+    try:
+        dist = float(dist)
+    except:
+        return 0.01
     
+    if 'mile' in unit: # miles
+        return round(dist, 2)
+    if 'kilo' in unit: # kilometers
+        return round(dist * 0.621371, 2)
+    if 'meter' in unit: # meters
+        return round(dist * 0.000621371, 2)
+    return round(dist * 0.000568182, 2) # yards
 
+    
 def parse_time(time, seconds = False):
     time = time.split(':')
     

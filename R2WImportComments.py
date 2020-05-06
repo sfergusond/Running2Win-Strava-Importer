@@ -59,9 +59,9 @@ def upload(activities, web):
         web.click(xpath='/html/body/div[3]/div/div/div/button')
         
         count += 1
-        progress = 'Updating Descriptions...'
+        progress = 'Updating descriptions...'
         t2 = time.time()
-        printProgressBar(count, len(activities), prefix = progress, t1 = t1, t2 = t2)
+        printProgressBar(count, len(activities), prefix = progress, length = 120, t1 = t1, t2 = t2)
     
     web.driver.close()
     
@@ -86,6 +86,8 @@ def add_desc(r2w, strava, policy, variance, web):
                     r['date'] = upload_date(r['date'])
                     r['distance'] = upload_distance(r['distance'])
                     R2WImporter.add_strava_entry(r, web)
+                elif policy == 'ignore': # skip activity
+                    continue
                 else: # add to existing activity
                     if len(tmp[r['date']][0]) == 2: # desc already appended
                         tmp[r['date']][0].append(r['description'])
@@ -100,7 +102,7 @@ def add_desc(r2w, strava, policy, variance, web):
         count += 1
         progress = 'Adding new activities...'
         t2 = time.time()
-        printProgressBar(count, len(r2w), prefix = progress, t1 = t1, t2 = t2)
+        printProgressBar(count, len(r2w), prefix = progress, length = 120, t1 = t1, t2 = t2)
 
     upload(result, web)
     
@@ -127,7 +129,7 @@ def organize_by_date(activities):
         
         count += 1
         progress = 'Formatting activities...'
-        printProgressBar(count, len(activities), prefix = progress)
+        printProgressBar(count, len(activities), prefix = progress, length = 100)
         
     return master
 
@@ -173,7 +175,7 @@ def read_csv(a, b): # only needed locally
             
     return li
     
-def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 25, fill = '█', printEnd = '\r', t1 = None, t2 = None, step = 1):
+def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, length = 100, fill = '█', printEnd = '\r', t1 = None, t2 = None, step = 1):
     """
     Borrowed from: https://stackoverflow.com/questions/3173320/text-progress-bar-in-the-console
     """
@@ -187,10 +189,12 @@ def printProgressBar(iteration, total, prefix = '', suffix = '', decimals = 1, l
     
     if est_time != '':    
         est_time = ' (' + str(est_time[:est_time.find('.')]) + ' remaining)'
+        
+    length = length - len(est_time) - len(prefix) - len(suffix)
     percent = ("{0:." + str(decimals) + "f}").format(100 * (iteration / float(total)))
     filledLength = int(length * iteration // total)
     bar = fill * filledLength + ' ' * (length - filledLength)
-    print(f'\r{prefix} |{bar}| {percent}% ({est_time}', end = printEnd)
+    print(f'\r{prefix} |{bar}| {percent}% {est_time}', end = printEnd)
     #print('\r%s|%s| %s%% %s%s' % (prefix, bar, percent, suffix, est_time), end = printEnd, flush = True)
     # Print New Line on Complete
     if iteration == total: 
