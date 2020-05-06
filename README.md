@@ -89,8 +89,6 @@ You probably have typos in your username/password information:
     - Member Comments
 * If `csv` is entered in the upload/csv prompt, then all gathered activities will be downloaded to a CSV file in the same directory as the downloaded program.
 * If `upload` is entered in the upload/csv prompt, then all gathered activities will be uploaded to Strava
-* If comment is entered in the upload/csv prompt, then R2WImporter will attempt to match descriptions from R2W with activities existing on Strava. User specifies how strict the matching policy is and what to do if no match is found (append incoming decscription to an existing Strava activity or create a new activity or ignore). Missing activities from Strava will be automatically uploaded.
-
-Note: Currently the program can only support logging into Strava via a Google account, Facebook account, Apple ID, or email/password combination.
+* If `comment` is entered in the upload/csv prompt, then R2WImporter will attempt to match descriptions from R2W with activities existing on Strava. User specifies how strict the matching policy is and what to do if no match is found (append incoming decscription to an existing Strava activity or create a new activity or ignore). Missing activities from Strava will be automatically uploaded.
 
 __Note: Usernames and passwords are not stored by the program__
