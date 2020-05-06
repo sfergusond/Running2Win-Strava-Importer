@@ -11,7 +11,7 @@ While you're at this step, go to `chrome://settings/help` and make sure you have
 ### 2) Extract files
 Once downloaded, double click on __r2wimporter.zip__ to extract all the files into their own folder (it'll be called __r2wimporter__ even though the screenshot has a different name). 
 
-Drag the folder to the desktop.__ Open the folder, and it should look like this:
+__Drag the folder to the desktop.__ Open the folder, and it should look like this:
 
 ![SCREENSHOT1](https://github.com/sfergusond/imgdump/blob/master/s4.png?raw=true)
 
