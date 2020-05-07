@@ -59,7 +59,7 @@ Double click on __R2WImporter.exe__ to run the program. _It will take about 5-10
 ### 3) The program is running
 The program will prompt you to enter some information in the same terminal window you opened. It should all be self explanatory, just hit ENTER once after typing each piece of information.
 
-The program will ask you for you Running2Win login info, after which the download will begin. If you chose to upload anything to Strava, the program will prompt you for Strava login info after the Running2Win data is downloaded.
+The program will ask you for your Running2Win login info, after which the download will begin. If you chose to upload anything to Strava, the program will prompt you for your Strava login info after the Running2Win data is downloaded.
 
 ### 4) Let the code run
 __Do not close the terminal window while the program runs or hit CTRL+C in the terminal__, print statements will notify you of the program's progress. Some error statements may print, but if the program keeps running just ignore them. If the program seems stalled for more than a few minutes, just hit ENTER into the terminal window. Usually this is caused by the web browser running in the back ground timing out.
