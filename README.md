@@ -26,9 +26,9 @@ Copy/paste the following commands, one at a time into the field denoted by the `
 
 ![SCREENSHOT2](https://github.com/sfergusond/imgdump/blob/master/s3.png?raw=true)
 
-3) `python3 -m pip install --upgrade pip` (if that doesn't work, try `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` then `python get-pip.py`)
+3) `python3 -m pip install --upgrade pip` _(if that doesn't work, try_ `curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py` _then_ `python get-pip.py`_)_
 4) `python3 -m pip install -r requirements.txt`
-5) `python3 R2WImporter.py` (this starts the program)
+5) `python3 R2WImporter.py` _(this starts the program)_
 
 ### 5) The program is running
 The program will prompt you to enter some information in the same terminal window you opened. It should all be self explanatory, just hit ENTER once after typing each piece of information.
